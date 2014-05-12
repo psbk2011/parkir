@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 2, 2014 10:14:13 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="model.Operator" table="operator" catalog="parkir_unpas">
+        <id name="idoperator" type="java.lang.Integer">
+            <column name="idoperator" />
+            <generator class="identity" />
+        </id>
+        <property name="namaLengkap" type="string">
+            <column name="nama_lengkap" length="30" not-null="true" />
+        </property>
+        <property name="namaPengguna" type="string">
+            <column name="nama_pengguna" length="12" not-null="true" />
+        </property>
+        <property name="kataSandi" type="string">
+            <column name="kata_sandi" length="65535" not-null="true" />
+        </property>
+        <property name="alamat" type="string">
+            <column name="alamat" length="65535" />
+        </property>
+        <property name="nomorTelepon" type="string">
+            <column name="nomor_telepon" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

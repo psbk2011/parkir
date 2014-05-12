@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 2, 2014 10:14:13 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="model.TransaksiAnggota" table="transaksi_anggota" catalog="parkir_unpas">
+        <id name="idHistory" type="int">
+            <column name="id_history" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="anggota" class="model.Anggota" fetch="select">
+            <column name="id_anggota" />
+        </many-to-one>
+        <many-to-one name="transaksi" class="model.Transaksi" fetch="select">
+            <column name="id_transaksi" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

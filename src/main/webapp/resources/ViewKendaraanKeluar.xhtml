@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Parkir unpas</title>
+	<link href="../css/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="../fonts/webfont/stylesheet.css" />
+	<link href="../css/style.css" rel="stylesheet" />
+
+</h:head>
+<h:body>
+	<h:form>
+		<div class="container-full">
+			<div class="col-md-6">
+
+				<!-- label tag kiri waktu -->
+				<p:outputPanel styleClass="tag">
+					<h:outputText value="Waktu" />
+				</p:outputPanel>
+
+				<!-- waktu dinamis -->
+				<div class="whitebox bxlogin">
+					<span class="glyphicon glyphicon-calendar"></span>
+					<p:clock pattern=" dd.MM.yyyy" mode="server" />
+					<span class="glyphicon glyphicon-time"></span>
+					<p:clock pattern="HH:mm:ss" mode="server" />
+				</div>
+
+				<!-- label tag kiri foto kendaraan -->
+				<p:outputPanel styleClass="tag">
+					<h:outputText value="Foto kendaraan" />
+				</p:outputPanel>
+
+				<div class="whitebox">
+
+					<!-- kendaraan masuk -->
+					<div class="col-md-6">
+						<p:outputPanel styleClass="tag">
+							<h:outputText value="Masuk" />
+						</p:outputPanel>
+						<img src="image/parkir.jpg" class="img-thumbnail"></img>
+					</div>
+
+					<!-- kendaraan keluar -->
+					<div class="col-md-6">
+						<p:outputPanel styleClass="tag">
+							<h:outputText value="Keluar" />
+						</p:outputPanel>
+						<img src="image/parkir.jpg" class="img-thumbnail"></img>
+					</div>
+					<p:spacer />
+				</div>
+			</div>
+
+			<div class="col-md-6">
+
+				<!-- label tag kanan -->
+				<p:outputPanel styleClass="tag">
+					<div class="row">
+						<div class="col-md-12">
+							<h:outputText value="Kendaraan Keluar, User " />
+							<a href="ViewLogin.jsf"><p:outputPanel
+									styleClass="glyphicon glyphicon-off kanan"></p:outputPanel></a>
+						</div>
+					</div>
+				</p:outputPanel>
+
+				<div class="whitebox bxlogin">
+
+					<!-- harga parkir -->
+					<h:outputText value="Harga : " />
+					<div class="harga">
+						<span class="glyphicon glyphicon-ok-circle "></span>
+						<h:outputText value="Rp.1000" />
+					</div>
+
+					<!-- texfield nopol -->
+					<p:growl id="growl" showDetail="true" sticky="true" />
+					<div class="col-md-6 col-md-offset-3 input-group input-group-lg">
+						<p:outputPanel styleClass="input-group-addon">
+							<p:outputPanel styleClass="glyphicon glyphicon-file"></p:outputPanel>
+						</p:outputPanel>
+						<p:inputText id="nopol" styleClass="form-control"
+							value="#{Transaksi.transaksi.noPolisi}" />
+						<p:watermark for="nopol" value="Nomor Polisi" />
+					</div>
+
+
+					<!-- texfield barcode -->
+					<div
+						class="col-md-6 col-md-offset-3 input-group input-group-lg margin">
+						<p:outputPanel styleClass="input-group-addon">
+							<p:outputPanel styleClass="glyphicon glyphicon-barcode"></p:outputPanel>
+						</p:outputPanel>
+						<p:inputText id="barcode" styleClass="form-control"
+							value="#{Transaksi.transaksi.barcode}" />
+						<p:watermark for="barcode" value="Kode Barcode" />
+					</div>
+
+
+					<!-- radio button jenis bayar -->
+					<h:outputText value="Jenis Bayar : " styleClass="font22" />
+					<div class="row">
+						<div class="col-md-4 col-md-offset-3">
+							<p:selectOneRadio id="options"
+								value="#{Transaksi.transaksi.tipeBayar}" styleClass="font22">
+								<f:selectItem itemLabel="Cash" itemValue="Cash" />
+								<f:selectItem itemLabel="Bypass" itemValue="Bypass" />
+								<f:selectItem itemLabel="Member" itemValue="Member" />
+							</p:selectOneRadio>
+						</div>
+					</div>
+
+
+					<!-- texfield total bayar -->
+					<div
+						class="col-md-6 col-md-offset-3 input-group input-group-lg margin">
+						<p:outputPanel styleClass="input-group-addon">
+							<p:outputPanel styleClass="glyphicon glyphicon-shopping-cart"></p:outputPanel>
+						</p:outputPanel>
+						<p:inputText id="total" styleClass="form-control"
+							value="#{Transaksi.transaksi.totalPembayaran}" />
+						<p:watermark for="total" value="Total Bayar" />
+					</div>
+
+					<!-- button bayar & reset -->
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3">
+							<p:commandButton ajax="false"
+								actionListener="#{Transaksi.cariBarcode}"
+								styleClass="btn btn-warning btncetak" value="Cetak" />
+							<p:commandButton ajax="false" type="reset"
+								styleClass="btn btn-warning btncetak" value="Reset" />
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</h:form>
+</h:body>
+</html>
+

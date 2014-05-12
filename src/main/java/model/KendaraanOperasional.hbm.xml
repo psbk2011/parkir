@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 2, 2014 10:14:13 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="model.KendaraanOperasional" table="kendaraan_operasional" catalog="parkir_unpas">
+        <id name="idKendaraan" type="java.lang.Integer">
+            <column name="id_kendaraan" />
+            <generator class="identity" />
+        </id>
+        <property name="noPolisi" type="string">
+            <column name="no_polisi" length="11" />
+        </property>
+        <property name="keteranganKendaraan" type="string">
+            <column name="keterangan_kendaraan" />
+        </property>
+    </class>
+</hibernate-mapping>

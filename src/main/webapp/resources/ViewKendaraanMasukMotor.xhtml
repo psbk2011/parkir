@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Parkir unpas</title>
+	<link href="../css/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="../fonts/webfont/stylesheet.css" />
+	<link href="../css/style.css" rel="stylesheet" />
+</h:head>
+<h:body>
+	<h:form>
+		<div class="container-full">
+			<div class="col-md-6 col-md-offset-3">
+			
+				<!-- tag selamat datang -->
+				<p:outputPanel styleClass="tag taglogin">
+					<h:outputText value="Selamat datang" />
+				</p:outputPanel>
+				<div class="whitebox">
+				
+					<!-- judul informasi -->
+					<span class="tiketjudul"><center>
+							<h:outputText value="Informasi ketersediaan" />
+						</center></span>
+					<div class="col-md-6 col-md-offset-3">
+						<p:outputPanel styleClass="tiketjudul">
+							<h:outputText value="Parkir Motor" />
+						</p:outputPanel>
+						<div class="harga">
+							<span class="glyphicon glyphicon-tags"></span> <span
+								class="jmltiket"><h:outputText value="350" /></span>
+						</div>
+					</div>
+
+					<!-- waktu dinamis -->
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3">
+							<p:outputPanel styleClass="glyphicon glyphicon-calendar" />
+							:
+							<p:clock pattern="dd.MM.yyyy" mode="server" />
+							<p:outputPanel styleClass="glyphicon glyphicon-time" />
+							:
+							<p:clock pattern="HH:mm:ss" mode="server" />
+						</div>
+					</div>
+					
+					<!-- button tiket motor -->
+					<p:commandButton action="#{Transaksi.print_motor}" ajax="false" value="Tiket Motor"
+						styleClass="btn btn-warning btncetak" />
+						
+				</div>
+			</div>
+		</div>
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 2, 2014 10:14:13 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="model.Anggota" table="anggota" catalog="parkir_unpas">
+        <id name="barcode" type="int">
+            <column name="barcode" />
+            <generator class="assigned" />
+        </id>
+        <property name="idAnggota" type="string">
+            <column name="id_anggota" length="12" not-null="true" />
+        </property>
+        <property name="namaLengkap" type="string">
+            <column name="nama_lengkap" length="45" />
+        </property>
+        <set name="transaksiAnggotas" table="transaksi_anggota" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_anggota" />
+            </key>
+            <one-to-many class="model.TransaksiAnggota" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Parkir unpas</title>
+	<link href="../css/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="../fonts/webfont/stylesheet.css" />
+	<link href="../css/style.css" rel="stylesheet" />
+</h:head>
+<h:body>
+	<h:form>
+		<p:outputPanel styleClass="container-full">
+			<div class="col-md-6">
+
+				<!-- label tag kiri waktu -->
+				<p:outputPanel styleClass="tag">
+					<h:outputText value="Waktu" />
+				</p:outputPanel>
+
+				<!-- waktu dinamis -->
+				<div class="whitebox bxlogin">
+					<p:outputPanel styleClass="glyphicon glyphicon-calendar" />
+					:
+					<p:clock pattern="dd.MM.yyyy" mode="server" />
+					/
+					<p:outputPanel styleClass="glyphicon glyphicon-time" />
+					:
+					<p:clock pattern="HH:mm:ss" mode="server" />
+				</div>
+
+				<!-- label tag kiri status parkir -->
+				<p:outputPanel styleClass="tag">
+					<h:outputText value="Status Parkir" />
+				</p:outputPanel>
+				<div class="whitebox bxlogin">
+					<p:outputPanel styleClass="glyphicon glyphicon-road">
+					</p:outputPanel>
+					<h:outputText value=" Mobil : 20 " />
+					<p:outputPanel styleClass="glyphicon glyphicon-road">
+					</p:outputPanel>
+					<h:outputText value=" Motor : 800" />
+				</div>
+
+			</div>
+
+			<div class="col-md-6">
+
+				<!-- label tag kanan opsi -->
+				<p:outputPanel styleClass="tag">
+					<div class="row">
+						<div class="col-md-12">
+							<h:outputText value="Opsi, User " />
+							<a href="ViewLogin.jsf"><p:outputPanel
+									styleClass="glyphicon glyphicon-off kanan"></p:outputPanel></a>
+						</div>
+					</div>
+				</p:outputPanel>
+
+				<div class="whitebox bxlogin">
+					<div class="col-md-6 ">
+
+						<!-- texfield kapasitas motor -->
+						<p:outputPanel styleClass="input-group input-group-lg">
+							<p:outputPanel styleClass="input-group-addon">
+								<p:outputPanel styleClass="glyphicon glyphicon-wrench"></p:outputPanel>
+							</p:outputPanel>
+							<p:inputText id="motor" styleClass="form-control"
+								value="#{opsiBean.motor}" />
+							<p:watermark for="motor" value="Kapasistas Motor" />
+						</p:outputPanel>
+
+
+						<!-- texfield kapasitas mobil -->
+						<p:outputPanel styleClass="input-group input-group-lg margin">
+							<p:outputPanel styleClass="input-group-addon">
+								<p:outputPanel styleClass="glyphicon glyphicon-wrench"></p:outputPanel>
+							</p:outputPanel>
+							<p:inputText id="mobil" styleClass="form-control"
+								value="#{opsiBean.mobil}" />
+							<p:watermark for="mobil" value="Kapasistas Mobil" />
+						</p:outputPanel>
+
+					</div>
+					<div class="col-md-6">
+
+						<!-- texfield kapasitas motor -->
+						<p:outputPanel styleClass="input-group input-group-lg">
+							<p:outputPanel styleClass="input-group-addon">
+								<p:outputPanel styleClass="glyphicon glyphicon-cog"></p:outputPanel>
+							</p:outputPanel>
+							<p:inputText id="hrgMotor" styleClass="form-control"
+								value="#{opsiBean.hrgMotor}" />
+							<p:watermark for="hrgMotor" value="Harga Per-Hari Motor" />
+						</p:outputPanel>
+
+
+						<!-- texfield kapasitas mobil -->
+						<p:outputPanel styleClass="input-group input-group-lg margin">
+							<p:outputPanel styleClass="input-group-addon">
+								<p:outputPanel styleClass="glyphicon glyphicon-cog"></p:outputPanel>
+							</p:outputPanel>
+							<p:inputText id="hrgMobil" styleClass="form-control"
+								value="#{opsiBean.hrgMobil}" />
+							<p:watermark for="hrgMobil" value="Harga Per-Hari Mobil" />
+						</p:outputPanel>
+
+					</div>
+
+					<!-- button simpan -->
+					<div class="row">
+						<div class="col-md-6 col-md-offset-4">
+							<p:commandButton value="Simpan"
+								styleClass="btn btn-warning btnunduh kiri" />
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</p:outputPanel>
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-catalog="parkir_unpas" match-name="anggota"/>
+  <table-filter match-catalog="parkir_unpas" match-name="kendaraan_operasional"/>
+  <table-filter match-catalog="parkir_unpas" match-name="log"/>
+  <table-filter match-catalog="parkir_unpas" match-name="operator"/>
+  <table-filter match-catalog="parkir_unpas" match-name="opsi"/>
+  <table-filter match-catalog="parkir_unpas" match-name="transaksi"/>
+  <table-filter match-catalog="parkir_unpas" match-name="transaksi_anggota"/>
+</hibernate-reverse-engineering>

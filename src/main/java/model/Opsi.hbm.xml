@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 2, 2014 10:14:13 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="model.Opsi" table="opsi" catalog="parkir_unpas">
+        <id name="idopsi" type="java.lang.Integer">
+            <column name="idopsi" />
+            <generator class="identity" />
+        </id>
+        <property name="namaOpsi" type="string">
+            <column name="nama_opsi" length="12" not-null="true" />
+        </property>
+        <property name="nilaiOpsi" type="string">
+            <column name="nilai_opsi" length="65535" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

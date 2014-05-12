@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 2, 2014 10:14:13 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="model.Log" table="log" catalog="parkir_unpas">
+        <id name="idlog" type="int">
+            <column name="idlog" />
+            <generator class="assigned" />
+        </id>
+        <property name="kejadian" type="string">
+            <column name="kejadian" length="30" not-null="true" />
+        </property>
+        <property name="deskripsi" type="string">
+            <column name="deskripsi" length="65535" not-null="true" />
+        </property>
+        <property name="tanggalKejadian" type="timestamp">
+            <column name="tanggal_kejadian" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

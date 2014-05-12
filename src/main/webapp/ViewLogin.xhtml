@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Parkir unpas</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="fonts/webfont/stylesheet.css" />
+	<link href="css/style.css" rel="stylesheet" />
+</h:head>
+<h:body>
+	<h:form id="form">
+		<p:growl id="growl" showDetail="true" life="3000" />
+		<div class="container-full">
+			<div class="col-md-4 col-md-offset-4">
+
+				<!-- tag login -->
+				<p:outputPanel styleClass="tag taglogin">
+					<h:outputText value="Otentifikasi Pengguna" />
+				</p:outputPanel>
+
+				<div class="whitebox bxlogin">
+					<div class="row">
+						<div class="col-md-12">
+
+							<!-- texfield nama penggguna -->
+							<p:outputPanel styleClass="input-group input-group-lg">
+								<p:outputPanel styleClass="input-group-addon">
+									<p:outputPanel styleClass="glyphicon glyphicon-user"></p:outputPanel>
+								</p:outputPanel>
+								<p:inputText value="#{LoginController.operator.namaPengguna}"
+									id="username" label="username" styleClass="form-control" />
+								<p:watermark for="username" value="Nama Pengguna" />
+							</p:outputPanel>
+
+
+
+							<!-- texfield kata sandi -->
+							<p:outputPanel styleClass="input-group input-group-lg margin">
+								<p:outputPanel styleClass="input-group-addon">
+									<p:outputPanel styleClass="glyphicon glyphicon-lock"></p:outputPanel>
+								</p:outputPanel>
+								<p:password value="#{LoginController.operator.kataSandi}"
+									id="password" label="password" styleClass="form-control" />
+								<p:watermark for="password" value="Kata sandi" />
+							</p:outputPanel>
+						</div>
+					</div>
+
+					<div class="row margin">
+
+						<!-- dropdown menu login -->
+						<div class="col-md-6">
+							<p:selectOneMenu value="#{LoginController.menu}"
+								styleClass="btn btn-default dropdown-toggle droplogin">
+								<f:selectItem itemLabel="Pilih menu" itemValue="Pilih menu"
+									styleClass="dropdown-menu" />
+								<f:selectItem itemLabel="Kendaraan Masuk Mobil"
+									itemValue="Kendaraan Masuk Mobil" />
+								<f:selectItem itemLabel="Kendaraan Masuk Motor"
+									itemValue="Kendaraan Masuk Motor" />
+								<f:selectItem itemLabel="Kendaraan Keluar"
+									itemValue="Kendaraan Keluar" />
+								<f:selectItem itemLabel="Opsi" itemValue="Opsi" />
+								<f:selectItem itemLabel="Operator" itemValue="Operator" />
+								<f:selectItem itemLabel="Laporan" itemValue="Laporan" />
+							</p:selectOneMenu>
+						</div>
+
+
+						<!-- button login -->
+						<div class="col-md-6">
+							<p:commandButton value="Masuk" action="#{LoginController.login}"
+								ajax="false" styleClass="btn btn-warning btncetak" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</h:form>
+</h:body>
+</html>

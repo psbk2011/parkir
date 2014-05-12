@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 14, 2014 8:44:40 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="model.Transaksi" table="transaksi" catalog="parkir_unpas">
+        <id name="idtransaksi" type="java.lang.Integer">
+            <column name="idtransaksi" />
+            <generator class="identity" />
+        </id>
+        <property name="barcode" type="string">
+            <column name="barcode" length="65535"/>
+        </property>
+        <property name="tipeKendaraan" type="string">
+            <column name="tipe_kendaraan" length="5"  />
+        </property>
+        <property name="waktuMasuk" type="timestamp">
+            <column name="waktu_masuk" length="19" />
+        </property>
+        <property name="gambarMasuk" type="string">
+            <column name="gambar_masuk" length="225" />
+        </property>
+        <property name="waktuKeluar" type="timestamp">
+            <column name="waktu_keluar" length="19" />
+        </property>
+        <property name="gambarKeluar" type="string">
+            <column name="gambar_keluar" length="225" />
+        </property>
+        <property name="totalBiaya" type="java.lang.Integer">
+            <column name="total_biaya" />
+        </property>
+        <property name="totalPembayaran" type="java.lang.Integer">
+            <column name="total_pembayaran" />
+        </property>
+        <property name="noPolisi" type="string">
+            <column name="no_polisi" length="11" />
+        </property>
+         <property name="tipeBayar" type="string">
+            <column name="tipe_bayar" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

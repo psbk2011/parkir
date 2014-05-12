@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Parkir unpas</title>
+
+	<link href="../css/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="../fonts/webfont/stylesheet.css" />
+	<link href="../css/style.css" rel="stylesheet" />
+</h:head>
+<h:body>
+	<h:form>
+		<p:outputPanel styleClass="container-full">
+			<p:outputPanel styleClass="col-md-6">
+
+				<!-- label tag kiri waktu -->
+				<p:outputPanel styleClass="tag">
+					<h:outputText value="Waktu" />
+				</p:outputPanel>
+
+				<!-- waktu dinamis -->
+				<div class="whitebox">
+					<p:outputPanel styleClass="glyphicon glyphicon-calendar" />
+					:
+					<p:clock pattern="dd.MM.yyyy" mode="server" />
+					/
+					<p:outputPanel styleClass="glyphicon glyphicon-time" />
+					:
+					<p:clock pattern="HH:mm:ss" mode="server" />
+				</div>
+
+				<!-- label tag kiri status parkir -->
+				<p:outputPanel styleClass="tag">
+					<h:outputText value="Status Parkir" />
+				</p:outputPanel>
+				<div class="whitebox">
+					<p:outputPanel styleClass="glyphicon glyphicon-road">
+					</p:outputPanel>
+					<h:outputText value=" Mobil : 20 " />
+					<p:outputPanel styleClass="glyphicon glyphicon-road">
+					</p:outputPanel>
+					<h:outputText value=" Motor : 800" />
+				</div>
+
+			</p:outputPanel>
+			<p:outputPanel styleClass="col-md-6">
+
+				<!-- label tag kanan laporan -->
+				<p:outputPanel styleClass="tag">
+					<div class="row">
+						<div class="col-md-12">
+							<h:outputText value="Laporan, User " />
+							<a href="ViewLogin.jsf"><p:outputPanel
+									styleClass="glyphicon glyphicon-off kanan"></p:outputPanel></a>
+						</div>
+					</div>
+				</p:outputPanel>
+
+				<div class="whitebox bxlogin">
+					<div class="row">
+						<div class="col-md-6 ">
+
+							<!-- texfield dari tanngal -->
+							<div class="col-xs-2">
+								<p:outputPanel styleClass="input-group input-group-lg">
+									<p:outputPanel styleClass="input-group-addon">
+										<p:outputPanel styleClass="glyphicon glyphicon-calendar"></p:outputPanel>
+									</p:outputPanel>
+									<p:calendar id="calDari" styleClass="form-control"
+										value="#{calendarBean.date1}" />
+									<p:watermark for="calDari" value="Dari tanggal" />
+								</p:outputPanel>
+							</div>
+
+						</div>
+						<div class="col-md-6">
+
+							<!-- texfield sampai tanggal -->
+							<p:outputPanel styleClass="input-group input-group-lg">
+								<p:outputPanel styleClass="input-group-addon">
+									<p:outputPanel styleClass="glyphicon glyphicon-calendar"></p:outputPanel>
+								</p:outputPanel>
+								<p:calendar id="calSampai" styleClass="form-control"
+									value="#{calendarBean.date1}" />
+								<p:watermark for="calSampai" value="Sampai tanggal" />
+							</p:outputPanel>
+
+						</div>
+					</div>
+
+					<!-- dropdown jenis laporan-->
+					<p:selectOneMenu value="#{buttonBean.number}"
+						styleClass="btn btn-default dropdown-toggle droplogin margin">
+						<f:selectItem itemLabel="Pilih jenis laporan"
+							styleClass="dropdown-menu" />
+						<f:selectItem itemLabel="Harian" itemValue="1" />
+						<f:selectItem itemLabel="Mingguan" itemValue="2" />
+						<f:selectItem itemLabel="Bulanan" itemValue="3" />
+						<f:selectItem itemLabel="Tahunan" itemValue="4" />
+						<f:selectItem itemLabel="Keuntungan" itemValue="5" />
+						<f:selectItem itemLabel="Kerugian" itemValue="6" />
+					</p:selectOneMenu>
+
+					<!-- button unduh -->
+					<div class="row">
+						<div class="col-md-6 col-md-offset-4">
+							<p:commandButton value="Unduh"
+								styleClass="btn btn-warning btnunduh kiri" />
+						</div>
+					</div>
+
+				</div>
+			</p:outputPanel>
+		</p:outputPanel>
+	</h:form>
+</h:body>
+</html>

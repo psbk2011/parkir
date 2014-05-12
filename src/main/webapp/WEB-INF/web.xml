@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	<display-name>Parkir-Master</display-name>
+	<filter>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>controller.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>/resources/*</url-pattern>
+	</filter-mapping>
+
+	<!-- By default go to secured welcome page -->
+	<welcome-file-list>
+		<welcome-file>resources/ViewOperator.jsf</welcome-file>
+	</welcome-file-list>
+	<welcome-file-list>
+		<welcome-file>resources/ViewKendaraanKeluar.jsf</welcome-file>
+	</welcome-file-list>
+	<welcome-file-list>
+		<welcome-file>resources/ViewKendaraanMasukMobil.jsf</welcome-file>
+	</welcome-file-list>
+	<welcome-file-list>
+		<welcome-file>resources/ViewKendaraanMasukMotor.jsf</welcome-file>
+	</welcome-file-list>
+	<welcome-file-list>
+		<welcome-file>resources/ViewLaporan.jsf</welcome-file>
+	</welcome-file-list>
+	<welcome-file-list>
+		<welcome-file>resources/ViewOpsi.jsf</welcome-file>
+	</welcome-file-list>
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>ui-lightness</param-value>
+	</context-param>
+</web-app>
