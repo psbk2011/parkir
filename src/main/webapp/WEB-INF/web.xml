@@ -13,25 +13,6 @@
 		<url-pattern>/resources/*</url-pattern>
 	</filter-mapping>
 
-	<!-- By default go to secured welcome page -->
-	<welcome-file-list>
-		<welcome-file>resources/ViewOperator.jsf</welcome-file>
-	</welcome-file-list>
-	<welcome-file-list>
-		<welcome-file>resources/ViewKendaraanKeluar.jsf</welcome-file>
-	</welcome-file-list>
-	<welcome-file-list>
-		<welcome-file>resources/ViewKendaraanMasukMobil.jsf</welcome-file>
-	</welcome-file-list>
-	<welcome-file-list>
-		<welcome-file>resources/ViewKendaraanMasukMotor.jsf</welcome-file>
-	</welcome-file-list>
-	<welcome-file-list>
-		<welcome-file>resources/ViewLaporan.jsf</welcome-file>
-	</welcome-file-list>
-	<welcome-file-list>
-		<welcome-file>resources/ViewOpsi.jsf</welcome-file>
-	</welcome-file-list>
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
 		<param-value>ui-lightness</param-value>
