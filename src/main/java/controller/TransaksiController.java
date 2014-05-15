@@ -1,10 +1,14 @@
 package controller;
 
-import java.awt.Color;
+import java.awt.print.Book;
+import java.awt.print.PageFormat;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.Serializable;
-import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Random;
 
@@ -13,13 +17,28 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.print.Doc;
+import javax.print.DocFlavor;
+import javax.print.DocPrintJob;
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
+import javax.print.SimpleDoc;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.standard.Sides;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPageable;
 
 import com.lowagie.text.Document;
-import com.lowagie.text.Image;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Font;
 import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.Barcode128;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfWriter;
+import com.lowagie.tools.Executable;
 
 import dao.TransaksiDao;
 
@@ -51,35 +70,74 @@ public class TransaksiController implements Serializable {
 
 	}
 
+	public String barcodeGen() {
+		Random ran = new Random();
+		String barcode = Integer.toString(ran.nextInt(10));
+		TransaksiDao c = new TransaksiDao();
+		while (barcode.length() != 22) {
+			barcode += Integer.toString(ran.nextInt(10));
+		}
+
+		return barcode;
+	}
+
+	public void printTiket(String pdfFilename) {
+		try {
+			Document doc = new Document(PageSize.A9.rotate());
+			Executable ex = new Executable();
+			String path = "d:/tmp/" + pdfFilename + ".pdf";
+			PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream(
+					path));
+			doc.setMargins(10, 1, 10, 1);
+			doc.setMarginMirroring(true);
+
+			doc.open();
+			Font font = new Font(Font.HELVETICA, 9);
+			doc.add(new Paragraph("Parkir Unpas IV", font));
+			doc.add(new Paragraph(this.transaksi.getWaktuMasuk().toString()));
+			PdfContentByte cb = writer.getDirectContent();
+			Barcode128 code128 = new Barcode128();
+			code128.setCode(this.transaksi.getBarcode().toString());
+			doc.add(code128.createImageWithBarcode(cb, null, null));
+			doc.close();
+
+			// Start Silent Print\
+
+			PrinterJob job = PrinterJob.getPrinterJob();
+			PageFormat pf = job.defaultPage();
+
+			PDDocument document = PDDocument.load("d:/tmp/" + pdfFilename
+					+ ".pdf");
+			job.setPageable(new PDPageable(document, job));
+
+			job.setJobName(pdfFilename + ".pdf");
+			try {
+				job.print();
+			} catch (PrinterException e) {
+				System.out.println(e);
+			}
+
+		} catch (DocumentException dex) {
+			dex.printStackTrace();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	public static void main(String[] args) {
+		TransaksiController tc = new TransaksiController();
+		tc.printTiket("test.pdf");
+	}
+
 	public void print_mobil() {
 		try {
 			Date date = new Date();
 			sdf.format(date);
 
-			Barcode128 code = new Barcode128();
-			SecureRandom prng = SecureRandom.getInstance("SHA1PRNG");
-			String randomNum = new Integer(prng.nextInt()).toString();
-
 			this.transaksi.setWaktuMasuk(date);
-			this.transaksi.setBarcode(randomNum);
+			this.transaksi.setBarcode(barcodeGen());
 			this.transaksi.setTipeKendaraan("Mobil");
-
-			code.setCode(randomNum);
-			code.setBarHeight(80f);
-			code.setX(1f);
-			Document document = new Document();
-			PdfWriter writer = PdfWriter.getInstance(document,
-					new FileOutputStream(
-							"C:/JSF/Parkir-Master/src/main/webapp/image/barcode/"
-									+ randomNum + ".pdf"));
-			document.setPageSize(PageSize.A5);
-			document.setMargins(20, 20, 20, 20);
-			document.open();
-			PdfContentByte cb = writer.getDirectContent();
-			Image barcodeimage = code.createImageWithBarcode(cb, Color.BLACK,
-					Color.BLACK);
-			document.add(barcodeimage);
-			document.close();
+			printTiket(this.getTransaksi().getBarcode().toString());
 		} catch (Exception e) {
 			System.out.println("Error Print Tiket Mobil : " + e.getMessage());
 		}
@@ -93,30 +151,11 @@ public class TransaksiController implements Serializable {
 			Date date = new Date();
 			sdf.format(date);
 
-			Barcode128 code = new Barcode128();
-			SecureRandom prng = SecureRandom.getInstance("SHA1PRNG");
-			String randomNum = new Integer(prng.nextInt()).toString();
-
 			this.transaksi.setWaktuMasuk(date);
-			this.transaksi.setBarcode(randomNum);
+			this.transaksi.setBarcode(barcodeGen());
 			this.transaksi.setTipeKendaraan("Motor");
 
-			// code.setCode(randomNum);
-			// code.setBarHeight(80f);
-			// code.setX(1f);
-			// Document document = new Document();
-			// PdfWriter writer = PdfWriter.getInstance(document,
-			// new FileOutputStream(
-			// "C:/JSF/Parkir-Master/src/main/webapp/image/barcode/"
-			// + randomNum + ".pdf"));
-			// document.setPageSize(PageSize.A5);
-			// document.setMargins(20, 20, 20, 20);
-			// document.open();
-			// PdfContentByte cb = writer.getDirectContent();
-			// Image barcodeimage = code.createImageWithBarcode(cb, Color.BLACK,
-			// Color.BLACK);
-			// document.add(barcodeimage);
-			// document.close();
+			printTiket(this.getTransaksi().getBarcode().toString());
 
 		} catch (Exception e) {
 			System.out.println("Error Print Tiket Mobil : " + e.getMessage());
@@ -142,7 +181,7 @@ public class TransaksiController implements Serializable {
 				TransaksiDao dao = new TransaksiDao();
 				dao.cariBarcode(getTransaksi());
 				resetTransaksi();
-//				dao.updateTransaksi(getTransaksi());
+				// dao.updateTransaksi(getTransaksi());
 			}
 
 		} catch (Exception e) {
