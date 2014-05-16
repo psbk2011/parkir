@@ -22,10 +22,13 @@
 				</p:outputPanel>
 
 				<!-- waktu dinamis -->
-				<div class="whitebox bxlogin">
-					<span class="glyphicon glyphicon-calendar"></span>
-					<p:clock pattern=" dd.MM.yyyy" mode="server" />
-					<span class="glyphicon glyphicon-time"></span>
+				<div class="whitebox">
+					<p:outputPanel styleClass="glyphicon glyphicon-calendar" />
+					:
+					<p:clock pattern="dd.MM.yyyy" mode="server" />
+					/
+					<p:outputPanel styleClass="glyphicon glyphicon-time" />
+					:
 					<p:clock pattern="HH:mm:ss" mode="server" />
 				</div>
 
@@ -70,13 +73,15 @@
 
 				<!-- label tag kanan -->
 				<p:outputPanel styleClass="tag">
+					<h:form>
 					<div class="row">
 						<div class="col-md-12">
-							<h:outputText value="Kendaraan Keluar, User " />
-							<a href="#"><p:outputPanel
-									styleClass="glyphicon glyphicon-off kanan"></p:outputPanel></a>
+							<h:outputText
+								value="Kendaraan Keluar, #{LoginController.operator.namaPengguna} " />											
+								<p:commandButton styleClass="btn btn-default" outcome="productDetail" icon="ui-icon-power" title="Logout" action="#{LoginController.doLogout}" />						
 						</div>
 					</div>
+					</h:form>
 				</p:outputPanel>
 
 				<div class="whitebox bxlogin">

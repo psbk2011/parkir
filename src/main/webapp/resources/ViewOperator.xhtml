@@ -119,15 +119,15 @@
 
 			<!-- label tag kanan pengelolaan operator -->
 			<p:outputPanel styleClass="tag">
+				<h:form>
 				<div class="row">
 					<div class="col-md-12">
 						<h:outputText
-							value="Pengelolaan Operator, #{LoginController.operator.namaPengguna} " />
-						<h:form>
-							<p:commandButton outcome="productDetail" icon="ui-icon-power" title="Icon Only" action="#{LoginController.doLogout}" />	
-						</h:form>
+							value="Pengelolaan Operator, #{LoginController.operator.namaPengguna} " />											
+							<p:commandButton styleClass="btn btn-default" outcome="productDetail" icon="ui-icon-power" title="Logout" action="#{LoginController.doLogout}" />						
 					</div>
 				</div>
+				</h:form>
 			</p:outputPanel>
 
 

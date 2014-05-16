@@ -47,16 +47,18 @@
 			</p:outputPanel>
 			<p:outputPanel styleClass="col-md-6">
 
-				<!-- label tag kanan laporan -->
-				<p:outputPanel styleClass="tag">
-					<div class="row">
-						<div class="col-md-12">
-							<h:outputText value="Laporan, User " />
-							<a href="ViewLogin.jsf"><p:outputPanel
-									styleClass="glyphicon glyphicon-off kanan"></p:outputPanel></a>
-						</div>
+			<!-- label tag kanan laporan -->
+			<p:outputPanel styleClass="tag">
+				<h:form>
+				<div class="row">
+					<div class="col-md-12">
+						<h:outputText
+							value="Laporan, #{LoginController.operator.namaPengguna} " />											
+							<p:commandButton styleClass="btn btn-default" outcome="productDetail" icon="ui-icon-power" title="Logout" action="#{LoginController.doLogout}" />						
 					</div>
-				</p:outputPanel>
+				</div>
+				</h:form>
+			</p:outputPanel>
 
 				<div class="whitebox bxlogin">
 					<div class="row">
