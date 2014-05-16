@@ -77,10 +77,12 @@
 					</div>
 					<div class="row margin">
 						<div class="col-md-6">
-							<p:commandButton styleClass="btn btn-warning btn-xs" value="Masuk motor" id="btn1" actionListener="#{LoginController.menu}" ajax="false"/>
+							<p:commandButton styleClass="btn btn-warning btn-xs" value="Masuk motor" id="btn1" actionListener="#{LoginController.doMasukMotor}" ajax="false"/>
 						</div>
 						<div class="col-md-6">
-							<p:commandButton styleClass="btn btn-warning btn-xs" value="Masuk mobil" id="btn2" actionListener="#{LoginController.menu}" ajax="false"/>
+							<p:commandButton styleClass="btn btn-warning btn-xs"
+								value="Masuk mobil" id="btn2"
+								actionListener="#{LoginController.doMasukMobil}" ajax="false" />
 						</div>						
 					</div>
 				</div>

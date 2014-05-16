@@ -117,8 +117,27 @@ public class LoginController {
 		return navigationBean.toLogin();
 
 	}
-	public String doLogout(){
+
+	public String doLogout() {
 		isLoggedIn = false;
 		return navigationBean.redirectToLogin();
+	}
+
+	public void doMasukMotor() {
+		try {
+			FacesContext.getCurrentInstance().getExternalContext()
+			.redirect("ViewKendaraanMasukMotor.jsf");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	public void doMasukMobil() {
+		try {
+			FacesContext.getCurrentInstance().getExternalContext()
+			.redirect("ViewKendaraanMasukMobil.jsf");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 }

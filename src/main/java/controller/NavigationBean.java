@@ -38,13 +38,13 @@ public class NavigationBean implements Serializable {
 		return "/resources/ViewKendaraanMasukMobil.jsf";
 	}
 	public String redirectKendaraanMasukMobil(){
-		return "/resources/ViewKendaraanMasukMobil.jsf?faces-redirect=true";
+		return "/ViewKendaraanMasukMobil.jsf";
 	}
 	public String viewKendaraanMasukMotor(){
 		return "/resources/ViewKendaraanMasukMotor.jsf";
 	}
 	public String redirectKendaraanMasukMotor(){
-		return "/resources/ViewKendaraanMasukMotor.jsf?faces-redirect=true";
+		return "/ViewKendaraanMasukMotor.jsf";
 	}
 	public String viewLaporan(){
 		return "/resources/ViewLaporan.jsf";
