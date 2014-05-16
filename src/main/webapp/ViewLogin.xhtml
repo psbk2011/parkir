@@ -56,10 +56,10 @@
 								styleClass="btn btn-default dropdown-toggle droplogin">
 								<f:selectItem itemLabel="Pilih menu" itemValue="Pilih menu"
 									styleClass="dropdown-menu" />
-								<f:selectItem itemLabel="Kendaraan Masuk Mobil"
+<!-- 								<f:selectItem itemLabel="Kendaraan Masuk Mobil"
 									itemValue="Kendaraan Masuk Mobil" />
 								<f:selectItem itemLabel="Kendaraan Masuk Motor"
-									itemValue="Kendaraan Masuk Motor" />
+									itemValue="Kendaraan Masuk Motor" /> -->
 								<f:selectItem itemLabel="Kendaraan Keluar"
 									itemValue="Kendaraan Keluar" />
 								<f:selectItem itemLabel="Opsi" itemValue="Opsi" />
@@ -74,6 +74,14 @@
 							<p:commandButton value="Masuk" action="#{LoginController.login}"
 								ajax="false" styleClass="btn btn-warning btncetak" />
 						</div>
+					</div>
+					<div class="row margin">
+						<div class="col-md-6">
+							<p:commandButton styleClass="btn btn-warning btn-xs" value="Masuk motor" id="btn1" actionListener="#{LoginController.menu}" ajax="false"/>
+						</div>
+						<div class="col-md-6">
+							<p:commandButton styleClass="btn btn-warning btn-xs" value="Masuk mobil" id="btn2" actionListener="#{LoginController.menu}" ajax="false"/>
+						</div>						
 					</div>
 				</div>
 			</div>

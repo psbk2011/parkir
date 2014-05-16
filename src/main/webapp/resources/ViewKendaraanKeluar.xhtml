@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3c.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Parkir unpas</title>
@@ -40,7 +41,7 @@
 						<p:outputPanel styleClass="tag">
 							<h:outputText value="Masuk" />
 						</p:outputPanel>
-						<img src="image/parkir.jpg" class="img-thumbnail"></img>
+						<img src="../image/parkir.jpg" class="img-thumbnail"></img>
 					</div>
 
 					<!-- kendaraan keluar -->
@@ -48,7 +49,18 @@
 						<p:outputPanel styleClass="tag">
 							<h:outputText value="Keluar" />
 						</p:outputPanel>
-						<img src="image/parkir.jpg" class="img-thumbnail"></img>
+						<h:form>
+							<h:panelGrid columns="3" class="img-thumbnail">
+								<p:photoCam widgetVar="pc" listener="#{photoCamBean.oncapture}"
+									update="photos" />
+
+								<p:imageSwitch effect="zoom" id="photos">
+									<ui:repeat value="#{photoCamBean.photos}" var="photo">
+										<p:graphicImage value="/photocam/#{photo}.png" />
+									</ui:repeat>
+								</p:imageSwitch>
+							</h:panelGrid>
+						</h:form>
 					</div>
 					<p:spacer />
 				</div>
@@ -61,7 +73,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<h:outputText value="Kendaraan Keluar, User " />
-							<a href="ViewLogin.jsf"><p:outputPanel
+							<a href="#"><p:outputPanel
 									styleClass="glyphicon glyphicon-off kanan"></p:outputPanel></a>
 						</div>
 					</div>
@@ -100,20 +112,6 @@
 					</div>
 
 
-					<!-- radio button jenis bayar -->
-					<h:outputText value="Jenis Bayar : " styleClass="font22" />
-					<div class="row">
-						<div class="col-md-4 col-md-offset-3">
-							<p:selectOneRadio id="options"
-								value="#{Transaksi.transaksi.tipeBayar}" styleClass="font22">
-								<f:selectItem itemLabel="Cash" itemValue="Cash" />
-								<f:selectItem itemLabel="Bypass" itemValue="Bypass" />
-								<f:selectItem itemLabel="Member" itemValue="Member" />
-							</p:selectOneRadio>
-						</div>
-					</div>
-
-
 					<!-- texfield total bayar -->
 					<div
 						class="col-md-6 col-md-offset-3 input-group input-group-lg margin">
@@ -129,8 +127,8 @@
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3">
 							<p:commandButton ajax="false"
-								actionListener="#{Transaksi.cariBarcode}"
-								styleClass="btn btn-warning btncetak" value="Cetak" />
+								actionListener="#{Transaksi.updateTransaksi}"
+								styleClass="btn btn-warning btncetak" value="Cetak" onclick="PF('pc').capture()" />
 							<p:commandButton ajax="false" type="reset"
 								styleClass="btn btn-warning btncetak" value="Reset" />
 						</div>

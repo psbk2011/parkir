@@ -124,9 +124,7 @@
 						<h:outputText
 							value="Pengelolaan Operator, #{LoginController.operator.namaPengguna} " />
 						<h:form>
-							<p:commandButton action="#{LoginController.doLogout}">
-								<p:outputPanel styleClass="glyphicon glyphicon-off kanan"></p:outputPanel>
-							</p:commandButton>
+							<p:commandButton outcome="productDetail" icon="ui-icon-power" title="Icon Only" action="#{LoginController.doLogout}" />	
 						</h:form>
 					</div>
 				</div>
