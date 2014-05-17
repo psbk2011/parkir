@@ -49,13 +49,15 @@
 				<!-- label tag kanan opsi -->
 				<p:outputPanel styleClass="tag">
 					<h:form>
-					<div class="row">
-						<div class="col-md-12">
-							<h:outputText
-								value="Opsi, #{LoginController.operator.namaPengguna} " />											
-								<p:commandButton styleClass="btn btn-default" outcome="productDetail" icon="ui-icon-power" title="Logout" action="#{LoginController.doLogout}" />						
+						<div class="row">
+							<div class="col-md-12">
+								<h:outputText
+									value="Opsi, #{LoginController.operator.namaPengguna} " />
+								<p:commandButton styleClass="btn btn-default" ajax="false"
+									outcome="productDetail" icon="ui-icon-power" title="Logout"
+									action="#{LoginController.doLogout}" />
+							</div>
 						</div>
-					</div>
 					</h:form>
 				</p:outputPanel>
 
@@ -67,8 +69,7 @@
 							<p:outputPanel styleClass="input-group-addon">
 								<p:outputPanel styleClass="glyphicon glyphicon-wrench"></p:outputPanel>
 							</p:outputPanel>
-							<p:inputText id="motor" styleClass="form-control"
-								value="#{opsiBean.motor}" />
+							<p:inputText id="motor" styleClass="form-control" />
 							<p:watermark for="motor" value="Kapasistas Motor" />
 						</p:outputPanel>
 
@@ -78,8 +79,7 @@
 							<p:outputPanel styleClass="input-group-addon">
 								<p:outputPanel styleClass="glyphicon glyphicon-wrench"></p:outputPanel>
 							</p:outputPanel>
-							<p:inputText id="mobil" styleClass="form-control"
-								value="#{opsiBean.mobil}" />
+							<p:inputText id="mobil" styleClass="form-control" />
 							<p:watermark for="mobil" value="Kapasistas Mobil" />
 						</p:outputPanel>
 
@@ -91,8 +91,7 @@
 							<p:outputPanel styleClass="input-group-addon">
 								<p:outputPanel styleClass="glyphicon glyphicon-cog"></p:outputPanel>
 							</p:outputPanel>
-							<p:inputText id="hrgMotor" styleClass="form-control"
-								value="#{opsiBean.hrgMotor}" />
+							<p:inputText id="hrgMotor" styleClass="form-control" />
 							<p:watermark for="hrgMotor" value="Harga Per-Hari Motor" />
 						</p:outputPanel>
 
@@ -102,8 +101,7 @@
 							<p:outputPanel styleClass="input-group-addon">
 								<p:outputPanel styleClass="glyphicon glyphicon-cog"></p:outputPanel>
 							</p:outputPanel>
-							<p:inputText id="hrgMobil" styleClass="form-control"
-								value="#{opsiBean.hrgMobil}" />
+							<p:inputText id="hrgMobil" styleClass="form-control" />
 							<p:watermark for="hrgMobil" value="Harga Per-Hari Mobil" />
 						</p:outputPanel>
 

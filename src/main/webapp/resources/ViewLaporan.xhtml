@@ -47,18 +47,20 @@
 			</p:outputPanel>
 			<p:outputPanel styleClass="col-md-6">
 
-			<!-- label tag kanan laporan -->
-			<p:outputPanel styleClass="tag">
-				<h:form>
-				<div class="row">
-					<div class="col-md-12">
-						<h:outputText
-							value="Laporan, #{LoginController.operator.namaPengguna} " />											
-							<p:commandButton styleClass="btn btn-default" outcome="productDetail" icon="ui-icon-power" title="Logout" action="#{LoginController.doLogout}" />						
-					</div>
-				</div>
-				</h:form>
-			</p:outputPanel>
+				<!-- label tag kanan laporan -->
+				<p:outputPanel styleClass="tag">
+					<h:form>
+						<div class="row">
+							<div class="col-md-12">
+								<h:outputText
+									value="Laporan, #{LoginController.operator.namaPengguna} " />
+								<p:commandButton styleClass="btn btn-default"
+									ajax="false" outcome="productDetail" icon="ui-icon-power" title="Logout"
+									action="#{LoginController.doLogout}" />
+							</div>
+						</div>
+					</h:form>
+				</p:outputPanel>
 
 				<div class="whitebox bxlogin">
 					<div class="row">
@@ -70,8 +72,7 @@
 									<p:outputPanel styleClass="input-group-addon">
 										<p:outputPanel styleClass="glyphicon glyphicon-calendar"></p:outputPanel>
 									</p:outputPanel>
-									<p:calendar id="calDari" styleClass="form-control"
-										value="#{calendarBean.date1}" />
+									<p:calendar id="calDari" styleClass="form-control" />
 									<p:watermark for="calDari" value="Dari tanggal" />
 								</p:outputPanel>
 							</div>
@@ -84,8 +85,7 @@
 								<p:outputPanel styleClass="input-group-addon">
 									<p:outputPanel styleClass="glyphicon glyphicon-calendar"></p:outputPanel>
 								</p:outputPanel>
-								<p:calendar id="calSampai" styleClass="form-control"
-									value="#{calendarBean.date1}" />
+								<p:calendar id="calSampai" styleClass="form-control" />
 								<p:watermark for="calSampai" value="Sampai tanggal" />
 							</p:outputPanel>
 
@@ -93,7 +93,7 @@
 					</div>
 
 					<!-- dropdown jenis laporan-->
-					<p:selectOneMenu value="#{buttonBean.number}"
+					<p:selectOneMenu
 						styleClass="btn btn-default dropdown-toggle droplogin margin">
 						<f:selectItem itemLabel="Pilih jenis laporan"
 							styleClass="dropdown-menu" />

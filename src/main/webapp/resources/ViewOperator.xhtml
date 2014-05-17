@@ -123,9 +123,11 @@
 				<div class="row">
 					<div class="col-md-12">
 						<h:outputText
-							value="Pengelolaan Operator, #{LoginController.operator.namaPengguna} " />											
-							<p:commandButton styleClass="btn btn-default" outcome="productDetail" icon="ui-icon-power" title="Logout" action="#{LoginController.doLogout}" />						
-					</div>
+							value="Pengelolaan Operator, #{LoginController.operator.namaPengguna} " />
+							<p:commandButton styleClass="btn btn-default" ajax="false"
+								outcome="productDetail" icon="ui-icon-power" title="Logout"
+								action="#{LoginController.doLogout}" />
+						</div>
 				</div>
 				</h:form>
 			</p:outputPanel>

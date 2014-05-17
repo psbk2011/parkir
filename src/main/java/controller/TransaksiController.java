@@ -85,7 +85,7 @@ public class TransaksiController implements Serializable {
 		try {
 			Document doc = new Document(PageSize.A9.rotate());
 			Executable ex = new Executable();
-			String path = "d:/tmp/" + pdfFilename + ".pdf";
+			String path = "e:/tmp/" + pdfFilename + ".pdf";
 			PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream(
 					path));
 			doc.setMargins(10, 1, 10, 1);
