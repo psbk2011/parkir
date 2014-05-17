@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Parkir unpas</title>
+	<link href="../css/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="../fonts/webfont/stylesheet.css" />
+	<link href="../css/style.css" rel="stylesheet" />
+</h:head>
+<h:body>
+	<div class="container-full">
+		<div class="col-md-6">
+
+			<!-- label tag kiri daftar operator -->
+			<p:outputPanel styleClass="tag">
+				<p:outputPanel styleClass="glyphicon glyphicon-user"></p:outputPanel>
+				<h:outputText value=" Daftar Anggota" />
+			</p:outputPanel>
+
+			<div class="whitebox bxlogin font22">
+				<div class="row boxsoperator">
+					<p:outputPanel styleClass="col-md-10 col-md-offset-1">
+						<h:form id="form">
+							<p:dataTable id="operator" var="opr"
+								value="#{operatorController.getAllOperator()}">
+								<p:column headerText="Id Anggota">
+									
+								</p:column>
+								<p:column headerText="Nama Lengkap">
+									<h:outputText value="#{opr.namaLengkap}" />
+								</p:column>
+								<p:column headerText="Aksi">
+									<p:growl id="messages" showDetail="true" />
+									<p:commandButton onclick="confirmation.show()"
+										update="messages" icon="ui-icon-trash" title="Delete"
+										styleClass="btn btn-danger">
+										<p:confirmDialog message="Anda yankin ingin menghapus data?"
+											hideEffect="explode" header="Hapus Anggota" severity="alert"
+											widgetVar="confirmation">
+
+											<p:commandButton value="Ya" oncomplete="confirmation.hide()"
+												actionListener="#{operatorController.deleteOperator}"
+												ajax="false">
+												<f:setPropertyActionListener value="#{opr}"
+													target="#{operatorController.operator}" />
+											</p:commandButton>
+											<p:commandButton value="Tidak" onclick="confirmation.hide()"
+												type="button" />
+										</p:confirmDialog>
+									</p:commandButton>
+									<p:commandButton update=":showUpdate:displayUpdate"
+										oncomplete="dialogUpdate.show()" icon="ui-icon-pencil"
+										title="Update" styleClass="btn btn-success">
+										<f:setPropertyActionListener
+											target="#{operatorController.operator}" value="#{opr}" />
+									</p:commandButton>
+								</p:column>
+							</p:dataTable>
+						</h:form>
+					</p:outputPanel>
+				</div>
+			</div>
+		</div>
+
+		<!-- Form Update Operator -->
+		<h:form id="showUpdate">
+			<p:dialog header="Operator Update" widgetVar="dialogUpdate"
+				showEffect="fade" hideEffect="explode" modal="true">
+				<h:panelGrid id="displayUpdate" columns="2" cellpadding="4">
+					<div class="row">
+						<div class="col-md-12">
+
+							<h:panelGrid columns="1" cellpadding="2" style="margin-bottom:10px">
+								<h:outputLabel for="Nama pengguna" value="Nama pengguna" />
+								<p:inputText styleClass="form-control" value="#{operatorController.operator.namaPengguna}" />
+								<br/>
+								<h:outputLabel for="Kata sandi" value="Kata sandi" />
+								<p:inputText styleClass="form-control" value="#{operatorController.operator.kataSandi}" />
+								<br/>
+								<h:outputLabel for="Nama pengguna" value="Nama pengguna" />
+								<p:inputText styleClass="form-control" value="#{operatorController.operator.namaLengkap}" />
+
+							</h:panelGrid>
+
+						</div>
+					</div>
+					<p:spacer/>
+					
+					<!-- button update -->
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3">
+							<p:commandButton value="Update" ajax="false"
+								actionListener="#{operatorController.updateOperator}">
+							</p:commandButton>
+						</div>
+					</div>
+				</h:panelGrid>
+			</p:dialog>
+		</h:form>
+		<!-- End Form Update Operator -->
+
+		<div class="col-md-6">
+
+			<!-- label tag kanan pengelolaan operator -->
+			<p:outputPanel styleClass="tag">
+				<h:form>
+					<div class="row">
+						<div class="col-md-12">
+							<h:outputText
+								value="Pengelolaan Operator, #{LoginController.operator.namaPengguna} " />
+							<p:commandButton styleClass="btn btn-default" ajax="false"
+								outcome="productDetail" icon="ui-icon-power" title="Logout"
+								action="#{LoginController.doLogout}" />
+						</div>
+					</div>
+				</h:form>
+			</p:outputPanel>
+
+
+
+			<!-- Start Form Add operator -->
+			<h:form id="formAddOperator">
+				<div class="whitebox bxlogin">
+					<div class="row">
+						<div class="col-md-6">
+						
+							<!-- texfield barcode -->
+							<p:outputPanel styleClass="input-group input-group-lg">
+								<p:outputPanel styleClass="input-group-addon">
+									<p:outputPanel styleClass="glyphicon glyphicon-barcode"></p:outputPanel>
+								</p:outputPanel>
+								<p:inputText value="#{barcode}"
+									id="barcode" label="barcode" styleClass="form-control" />
+								<p:watermark for="barcode" value="Barcode" />
+							</p:outputPanel>
+
+							<!-- texfield id anggota -->
+							<p:outputPanel styleClass="input-group input-group-lg margin">
+								<p:outputPanel styleClass="input-group-addon">
+									<p:outputPanel styleClass="glyphicon glyphicon-align-justify"></p:outputPanel>
+								</p:outputPanel>
+								<p:inputText value="#{idAnggota}"
+									id="idAnggota" label="idAnggota" styleClass="form-control" />
+								<p:watermark for="idAnggota" value="Id anggota" />
+							</p:outputPanel>
+
+						</div>
+
+						<div class="col-md-6">
+
+							<!-- texfield nama lengkap -->
+							<p:outputPanel styleClass="input-group input-group-lg">
+								<p:outputPanel styleClass="input-group-addon">
+									<p:outputPanel styleClass="glyphicon glyphicon-user"></p:outputPanel>
+								</p:outputPanel>
+								<p:inputText value="#{namaLengkap}"
+									id="namaLengkap" label="namaLengkap" styleClass="form-control" />
+								<p:watermark for="namaLengkap" value="Nama lengkap" />
+							</p:outputPanel>
+
+						</div>
+					</div>
+
+					<!-- button tambah -->
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3">
+							<p:commandButton value="Tambah" ajax="false"
+								actionListener="#{saveAnggota}"
+								styleClass="btn btn-warning btncetak" />
+						</div>
+					</div>
+				</div>
+			</h:form>
+			<!-- End Form Operator -->
+		</div>
+	</div>
+</h:body>
+</html>
