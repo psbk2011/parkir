@@ -76,7 +76,7 @@ public class AnggotaController implements java.io.Serializable {
 		}
 	}
 
-	public void deleteAnggota(ActionEvent actionEvent) {
+	public void deleteAnggota() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			AnggotaDao dao = new AnggotaDao();
@@ -88,7 +88,7 @@ public class AnggotaController implements java.io.Serializable {
 		}
 	}
 
-	public void updateAnggota(ActionEvent actionEvent) {
+	public void updateAnggota() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			AnggotaDao dao = new AnggotaDao();
