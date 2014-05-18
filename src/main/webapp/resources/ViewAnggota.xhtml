@@ -24,13 +24,13 @@
 				<div class="row boxsoperator">
 					<p:outputPanel styleClass="col-md-10 col-md-offset-1">
 						<h:form id="form">
-							<p:dataTable id="operator" var="opr"
-								value="#{operatorController.getAllOperator()}">
-								<p:column headerText="Id Anggota">
-									
-								</p:column>
+							<p:dataTable id="dataOperator" value="#{AnggotaController.read}"
+								var="list" paginator="true" rows="5" paginatorPosition="bottom"
+								paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+								emptyMessage="Tidak Ada Data Anggota"
+								filteredValue="#{AnggotaController.list}">
 								<p:column headerText="Nama Lengkap">
-									<h:outputText value="#{opr.namaLengkap}" />
+									<h:outputText value="#{list.namaLengkap}" />
 								</p:column>
 								<p:column headerText="Aksi">
 									<p:growl id="messages" showDetail="true" />
@@ -42,20 +42,20 @@
 											widgetVar="confirmation">
 
 											<p:commandButton value="Ya" oncomplete="confirmation.hide()"
-												actionListener="#{operatorController.deleteOperator}"
+												actionListener="#{AnggotaController.deleteAnggota}"
 												ajax="false">
-												<f:setPropertyActionListener value="#{opr}"
-													target="#{operatorController.operator}" />
+												<f:setPropertyActionListener value="#{list}"
+													target="#{AnggotaController.anggota}" />
 											</p:commandButton>
 											<p:commandButton value="Tidak" onclick="confirmation.hide()"
 												type="button" />
 										</p:confirmDialog>
 									</p:commandButton>
 									<p:commandButton update=":showUpdate:displayUpdate"
-										oncomplete="dialogUpdate.show()" icon="ui-icon-pencil"
+										oncomplete="dialogUpdate.show()" icon="ui-icon-wrench"
 										title="Update" styleClass="btn btn-success">
 										<f:setPropertyActionListener
-											target="#{operatorController.operator}" value="#{opr}" />
+											target="#{AnggotaController.anggota}" value="#{list}" />
 									</p:commandButton>
 								</p:column>
 							</p:dataTable>
@@ -67,33 +67,37 @@
 
 		<!-- Form Update Operator -->
 		<h:form id="showUpdate">
-			<p:dialog header="Operator Update" widgetVar="dialogUpdate"
+			<p:dialog header="Anggota Update" widgetVar="dialogUpdate"
 				showEffect="fade" hideEffect="explode" modal="true">
 				<h:panelGrid id="displayUpdate" columns="2" cellpadding="4">
 					<div class="row">
 						<div class="col-md-12">
 
-							<h:panelGrid columns="1" cellpadding="2" style="margin-bottom:10px">
+							<h:panelGrid columns="1" cellpadding="2"
+								style="margin-bottom:10px">
+								<h:outputLabel for="Barcode" value="Barcode" />
+								<p:inputText styleClass="form-control"
+									value="#{AnggotaController.anggota.barcode}" />
+								<br />
+								<h:outputLabel for="ID Anggota" value="ID Anggota" />
+								<p:inputText styleClass="form-control"
+									value="#{AnggotaController.anggota.idAnggota}" />
+								<br />
 								<h:outputLabel for="Nama pengguna" value="Nama pengguna" />
-								<p:inputText styleClass="form-control" value="#{operatorController.operator.namaPengguna}" />
-								<br/>
-								<h:outputLabel for="Kata sandi" value="Kata sandi" />
-								<p:inputText styleClass="form-control" value="#{operatorController.operator.kataSandi}" />
-								<br/>
-								<h:outputLabel for="Nama pengguna" value="Nama pengguna" />
-								<p:inputText styleClass="form-control" value="#{operatorController.operator.namaLengkap}" />
+								<p:inputText styleClass="form-control"
+									value="#{AnggotaController.anggota.namaLengkap}" />
 
 							</h:panelGrid>
 
 						</div>
 					</div>
-					<p:spacer/>
-					
+					<p:spacer />
+
 					<!-- button update -->
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3">
 							<p:commandButton value="Update" ajax="false"
-								actionListener="#{operatorController.updateOperator}">
+								actionListener="#{AnggotaController.updateAnggota}">
 							</p:commandButton>
 						</div>
 					</div>
@@ -111,9 +115,21 @@
 						<div class="col-md-12">
 							<h:outputText
 								value="Pengelolaan Operator, #{LoginController.operator.namaPengguna} " />
-							<p:commandButton styleClass="btn btn-default" ajax="false"
-								outcome="productDetail" icon="ui-icon-power" title="Logout"
-								action="#{LoginController.doLogout}" />
+							<p:commandButton styleClass="btn btn-default"
+								onclick="confirmation.show()" outcome="productDetail"
+								icon="ui-icon-power" title="Logout">
+								<p:growl id="messages" showDetail="true" />
+								<p:confirmDialog message="Anda yankin akan Logout?"
+									hideEffect="explode" header="Hapus Anggota" severity="alert"
+									widgetVar="confirmation">
+
+									<p:commandButton value="Ya" oncomplete="confirmation.hide()"
+										action="#{LoginController.doLogout}" ajax="false">
+									</p:commandButton>
+									<p:commandButton value="Tidak" onclick="confirmation.hide()"
+										type="button" />
+								</p:confirmDialog>
+							</p:commandButton>
 						</div>
 					</div>
 				</h:form>
@@ -122,17 +138,17 @@
 
 
 			<!-- Start Form Add operator -->
-			<h:form id="formAddOperator">
+			<h:form id="formAddAnggota">
 				<div class="whitebox bxlogin">
 					<div class="row">
 						<div class="col-md-6">
-						
+
 							<!-- texfield barcode -->
 							<p:outputPanel styleClass="input-group input-group-lg">
 								<p:outputPanel styleClass="input-group-addon">
 									<p:outputPanel styleClass="glyphicon glyphicon-barcode"></p:outputPanel>
 								</p:outputPanel>
-								<p:inputText value="#{barcode}"
+								<p:inputText value="#{AnggotaController.anggota.barcode}"
 									id="barcode" label="barcode" styleClass="form-control" />
 								<p:watermark for="barcode" value="Barcode" />
 							</p:outputPanel>
@@ -142,7 +158,7 @@
 								<p:outputPanel styleClass="input-group-addon">
 									<p:outputPanel styleClass="glyphicon glyphicon-align-justify"></p:outputPanel>
 								</p:outputPanel>
-								<p:inputText value="#{idAnggota}"
+								<p:inputText value="#{AnggotaController.anggota.idAnggota}"
 									id="idAnggota" label="idAnggota" styleClass="form-control" />
 								<p:watermark for="idAnggota" value="Id anggota" />
 							</p:outputPanel>
@@ -156,7 +172,7 @@
 								<p:outputPanel styleClass="input-group-addon">
 									<p:outputPanel styleClass="glyphicon glyphicon-user"></p:outputPanel>
 								</p:outputPanel>
-								<p:inputText value="#{namaLengkap}"
+								<p:inputText value="#{AnggotaController.anggota.namaLengkap}"
 									id="namaLengkap" label="namaLengkap" styleClass="form-control" />
 								<p:watermark for="namaLengkap" value="Nama lengkap" />
 							</p:outputPanel>
@@ -168,7 +184,7 @@
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3">
 							<p:commandButton value="Tambah" ajax="false"
-								actionListener="#{saveAnggota}"
+								actionListener="#{AnggotaController.saveAnggota}"
 								styleClass="btn btn-warning btncetak" />
 						</div>
 					</div>

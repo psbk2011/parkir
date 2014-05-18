@@ -14,11 +14,5 @@
         <property name="namaLengkap" type="string">
             <column name="nama_lengkap" length="45" />
         </property>
-        <set name="transaksiAnggotas" table="transaksi_anggota" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="id_anggota" />
-            </key>
-            <one-to-many class="model.TransaksiAnggota" />
-        </set>
     </class>
 </hibernate-mapping>

@@ -17,9 +17,12 @@ import dao.OperatorDao;
 @SessionScoped
 public class OperatorController implements java.io.Serializable {
 	private Operator operator;
+	private List<OperatorController> list;
 
 	public OperatorController() {
-		operator = new Operator();
+		if (operator == null) {
+			operator = new Operator();
+		}
 	}
 
 	public Operator getOperator() {
@@ -28,6 +31,13 @@ public class OperatorController implements java.io.Serializable {
 
 	public void setOperator(Operator operator) {
 		this.operator = operator;
+	}
+	public List<OperatorController> getList() {
+		return list;
+	}
+
+	public void setList(List<OperatorController> list) {
+		this.list = list;
 	}
 
 	public void saveOperator(ActionEvent actionEvent) {
@@ -89,13 +99,13 @@ public class OperatorController implements java.io.Serializable {
 		}
 	}
 
-	public List<Operator> getAllOperator() {
+	public List<Operator> getRead() {
 		try {
 			List<Operator> operator = new ArrayList<Operator>();
 			OperatorDao dao = new OperatorDao();
 			operator = dao.getAllOperator();
 			return operator;
-			
+
 		} catch (NullPointerException e) {
 			System.out.println("Erorr karena : " + e.getMessage());
 

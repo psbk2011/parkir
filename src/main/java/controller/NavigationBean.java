@@ -34,6 +34,9 @@ public class NavigationBean implements Serializable {
 	public String redirectToKendaraanKeluar(){
 		return "/resources/ViewKendaraanKeluar.jsf?faces-redirect=true";
 	}
+	public String redirectToAnggota(){
+		return "/resources/ViewAnggota.jsf?faces-redirect=true";
+	}
 	public String viewKendaraanMasukMobil(){
 		return "/resources/ViewKendaraanMasukMobil.jsf";
 	}

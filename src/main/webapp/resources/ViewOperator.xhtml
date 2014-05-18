@@ -24,10 +24,13 @@
 				<div class="row boxsoperator">
 					<p:outputPanel styleClass="col-md-10 col-md-offset-1">
 						<h:form id="form">
-							<p:dataTable id="operator" var="opr"
-								value="#{operatorController.getAllOperator()}">
+							<p:dataTable id="dataOperator" value="#{operatorController.read}"
+								var="list" paginator="true" rows="5" paginatorPosition="bottom"
+								paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+								emptyMessage="Tidak Ada Data Operator"
+								filteredValue="#{operatorController.list}">
 								<p:column headerText="Nama Lengkap">
-									<h:outputText value="#{opr.namaLengkap}" />
+									<h:outputText value="#{list.namaLengkap}" />
 								</p:column>
 								<p:column headerText="Aksi">
 									<p:growl id="messages" showDetail="true" />
@@ -41,7 +44,7 @@
 											<p:commandButton value="Ya" oncomplete="confirmation.hide()"
 												actionListener="#{operatorController.deleteOperator}"
 												ajax="false">
-												<f:setPropertyActionListener value="#{opr}"
+												<f:setPropertyActionListener value="#{list}"
 													target="#{operatorController.operator}" />
 											</p:commandButton>
 											<p:commandButton value="Tidak" onclick="confirmation.hide()"
@@ -49,10 +52,10 @@
 										</p:confirmDialog>
 									</p:commandButton>
 									<p:commandButton update=":showUpdate:displayUpdate"
-										oncomplete="dialogUpdate.show()" icon="ui-icon-pencil"
+										oncomplete="dialogUpdate.show()" icon="ui-icon-wrench"
 										title="Update" styleClass="btn btn-success">
 										<f:setPropertyActionListener
-											target="#{operatorController.operator}" value="#{opr}" />
+											target="#{operatorController.operator}" value="#{list}" />
 									</p:commandButton>
 								</p:column>
 							</p:dataTable>
@@ -70,22 +73,26 @@
 					<div class="row">
 						<div class="col-md-12">
 
-							<h:panelGrid columns="1" cellpadding="2" style="margin-bottom:10px">
+							<h:panelGrid columns="1" cellpadding="2"
+								style="margin-bottom:10px">
 								<h:outputLabel for="Nama pengguna" value="Nama pengguna" />
-								<p:inputText styleClass="form-control" value="#{operatorController.operator.namaPengguna}" />
-								<br/>
+								<p:inputText styleClass="form-control"
+									value="#{operatorController.operator.namaPengguna}" />
+								<br />
 								<h:outputLabel for="Kata sandi" value="Kata sandi" />
-								<p:inputText styleClass="form-control" value="#{operatorController.operator.kataSandi}" />
-								<br/>
+								<p:inputText styleClass="form-control"
+									value="#{operatorController.operator.kataSandi}" />
+								<br />
 								<h:outputLabel for="Nama pengguna" value="Nama pengguna" />
-								<p:inputText styleClass="form-control" value="#{operatorController.operator.namaLengkap}" />
+								<p:inputText styleClass="form-control"
+									value="#{operatorController.operator.namaLengkap}" />
 
 							</h:panelGrid>
 
 						</div>
 					</div>
-					<p:spacer/>
-					
+					<p:spacer />
+
 					<!-- button update -->
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3">
@@ -108,9 +115,21 @@
 						<div class="col-md-12">
 							<h:outputText
 								value="Pengelolaan Operator, #{LoginController.operator.namaPengguna} " />
-							<p:commandButton styleClass="btn btn-default" ajax="false"
-								outcome="productDetail" icon="ui-icon-power" title="Logout"
-								action="#{LoginController.doLogout}" />
+							<p:commandButton styleClass="btn btn-default"
+								onclick="confirmation.show()" outcome="productDetail"
+								icon="ui-icon-power" title="Logout">
+								<p:growl id="messages" showDetail="true" />
+								<p:confirmDialog message="Anda yankin akan Logout?"
+									hideEffect="explode" header="Hapus Anggota" severity="alert"
+									widgetVar="confirmation">
+
+									<p:commandButton value="Ya" oncomplete="confirmation.hide()"
+										action="#{LoginController.doLogout}" ajax="false">
+									</p:commandButton>
+									<p:commandButton value="Tidak" onclick="confirmation.hide()"
+										type="button" />
+								</p:confirmDialog>
+							</p:commandButton>
 						</div>
 					</div>
 				</h:form>

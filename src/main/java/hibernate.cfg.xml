@@ -9,7 +9,8 @@
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.format_sql">true</property>
-	<mapping class="model.Transaksi" resource="model/Transaksi.hbm.xml" />
+		<mapping class="model.Transaksi" resource="model/Transaksi.hbm.xml" />
 		<mapping class="model.Operator" resource="model/Operator.hbm.xml" />
+		<mapping class="model.Anggota" resource="model/Anggota.hbm.xml"/>
 	</session-factory>
 </hibernate-configuration>

@@ -99,9 +99,12 @@ public class LoginController {
 				} else if (menu.equals("Opsi")) {
 					isLoggedIn = true;
 					return navigationBean.redirectOpsi();
+				}else if(menu.equals("Anggota")){
+					isLoggedIn = true;
+					return navigationBean.redirectToAnggota();
 				} else if (menu.equals("Laporan")) {
 					isLoggedIn = true;
-					return navigationBean.redirectOpsi();
+					return navigationBean.redirectLaporan();
 				} else {
 
 				}

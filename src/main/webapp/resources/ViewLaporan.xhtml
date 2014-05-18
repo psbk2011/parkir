@@ -53,10 +53,22 @@
 						<div class="row">
 							<div class="col-md-12">
 								<h:outputText
-									value="Laporan, #{LoginController.operator.namaPengguna} " />
+									value="Pengelolaan Operator, #{LoginController.operator.namaPengguna} " />
 								<p:commandButton styleClass="btn btn-default"
-									ajax="false" outcome="productDetail" icon="ui-icon-power" title="Logout"
-									action="#{LoginController.doLogout}" />
+									onclick="confirmation.show()" outcome="productDetail"
+									icon="ui-icon-power" title="Logout">
+									<p:growl id="messages" showDetail="true" />
+									<p:confirmDialog message="Anda yankin akan Logout?"
+										hideEffect="explode" header="Hapus Anggota" severity="alert"
+										widgetVar="confirmation">
+
+										<p:commandButton value="Ya" oncomplete="confirmation.hide()"
+											action="#{LoginController.doLogout}" ajax="false">
+										</p:commandButton>
+										<p:commandButton value="Tidak" onclick="confirmation.hide()"
+											type="button" />
+									</p:confirmDialog>
+								</p:commandButton>
 							</div>
 						</div>
 					</h:form>
