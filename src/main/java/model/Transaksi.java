@@ -38,6 +38,9 @@ public class Transaksi implements java.io.Serializable {
 	StringBuilder result = new StringBuilder();
 	private Set transaksiAnggotas = new HashSet(0);
 	private int transaksiSelected;
+	private long rowCount;
+	private long jumlahMotor;
+	private long jumlahMobil;
 
 
 	public Transaksi() {
@@ -153,6 +156,30 @@ public class Transaksi implements java.io.Serializable {
 
 	public void setTransaksiSelected(int transaksiSelected) {
 		this.transaksiSelected = transaksiSelected;
+	}
+
+	public long getRowCount() {
+		return rowCount;
+	}
+
+	public void setRowCount(long rowCount) {
+		this.rowCount = rowCount;
+	}
+
+	public long getJumlahMotor() {
+		return jumlahMotor;
+	}
+
+	public void setJumlahMotor(long jumlahMotor) {
+		this.jumlahMotor = jumlahMotor;
+	}
+
+	public long getJumlahMobil() {
+		return jumlahMobil;
+	}
+
+	public void setJumlahMobil(long jumlahMobil) {
+		this.jumlahMobil = jumlahMobil;
 	}
 	
 }

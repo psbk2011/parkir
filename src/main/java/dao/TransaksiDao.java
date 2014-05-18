@@ -1,44 +1,22 @@
 package dao;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Iterator;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import hibernate.HibernateUtils;
 import model.Transaksi;
 
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Projection;
-import org.hibernate.criterion.Projections;
-import org.hibernate.id.uuid.Helper;
-import org.jboss.jandex.Main;
 
-@ManagedBean
-@SessionScoped
-public class TransaksiDao implements Serializable {
-
-	private int jumlahMotor = 100;
-	
-
-	public TransaksiDao() {
-
-	}
-
-	public int getJumlahMotor() {
-		return jumlahMotor;
-	}
-
-	public void setJumlahMotor(int jumlahMotor) {
-		this.jumlahMotor = jumlahMotor;
-	}
-
+public class TransaksiDao {
 	public void addTransaksi(Transaksi transaksi) {
 		Transaction trns = null;
 		Session session = HibernateUtils.getSessionFactory().openSession();
@@ -123,21 +101,36 @@ public class TransaksiDao implements Serializable {
 
 	}
 
-	public void countMotor() {
+	public void countMotor(Transaksi transaksi) {
 		Session session = HibernateUtils.getSessionFactory().openSession();
-		Criteria criteria = session.createCriteria(Transaksi.class);
-		criteria.setProjection(Projections.rowCount());
-		@SuppressWarnings("rawtypes")
-		List list = criteria.list();
-		Object count = list.get(0);
-	
-		System.out.println("jumlah :" + count);
+		try {
+			String SQL_QUERY = "SELECT COUNT(*) FROM Transaksi WHERE tipe_kendaraan = 'Motor'";
+			Query query = session.createQuery(SQL_QUERY);
 
+			for (Iterator it = query.iterate(); it.hasNext();) {
+				transaksi.setRowCount((Long) it.next());
+				transaksi.setJumlahMotor((200) - transaksi.getRowCount());
+			}
+			session.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	public static void main(String[] args) {
-		TransaksiDao o = new TransaksiDao();
-		o.countMotor();
+	public void countMobil(Transaksi transaksi) {
+		Session session = HibernateUtils.getSessionFactory().openSession();
+		try {
+			String SQL_QUERY = "SELECT COUNT(*) FROM Transaksi WHERE tipe_kendaraan = 'Mobil'";
+			Query query = session.createQuery(SQL_QUERY);
+
+			for (Iterator it = query.iterate(); it.hasNext();) {
+				transaksi.setRowCount((Long) it.next());
+				transaksi.setJumlahMobil((50) - transaksi.getRowCount());
+			}
+			session.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -1,33 +1,25 @@
 package controller;
 
-import java.awt.print.Book;
 import java.awt.print.PageFormat;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Random;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPageable;
 
 import model.Transaksi;
-//
-//import org.apache.pdfbox.pdmodel.PDDocument;
-//import org.apache.pdfbox.pdmodel.PDPageable;
-
-
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
@@ -43,31 +35,24 @@ import dao.TransaksiDao;
 
 @ManagedBean(name = "Transaksi")
 @SessionScoped
+@ViewScoped
 public class TransaksiController implements Serializable {
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	private static final long serialVersionUID = 1L;
 	private Transaksi transaksi;
-	private int jumlahMotor;
 
 	public TransaksiController() {
 		transaksi = new model.Transaksi();
+		countMotor();
+		countMobil();
 	}
 
-	public model.Transaksi getTransaksi() {
+	public Transaksi getTransaksi() {
 		return transaksi;
 	}
 
 	public void setTransaksi(model.Transaksi transaksi) {
 		this.transaksi = transaksi;
-	}
-
-	public int getJumlahMotor() {
-		return jumlahMotor;
-	}
-
-	public void setJumlahMotor(int jumlahMotor) {
-		this.jumlahMotor = jumlahMotor;
 	}
 
 	public void resetTransaksi() {
@@ -114,9 +99,9 @@ public class TransaksiController implements Serializable {
 			PrinterJob job = PrinterJob.getPrinterJob();
 			PageFormat pf = job.defaultPage();
 
-			 PDDocument document = PDDocument.load("e:/tmp/" + pdfFilename
-			 + ".pdf");
-			 job.setPageable(new PDPageable(document, job));
+			PDDocument document = PDDocument.load("e:/tmp/" + pdfFilename
+					+ ".pdf");
+			job.setPageable(new PDPageable(document, job));
 
 			job.setJobName(pdfFilename + ".pdf");
 			try {
@@ -218,7 +203,16 @@ public class TransaksiController implements Serializable {
 	public void countMotor() {
 		try {
 			TransaksiDao dao = new TransaksiDao();
-			dao.countMotor();
+			dao.countMotor(getTransaksi());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public void countMobil() {
+		try {
+			TransaksiDao dao = new TransaksiDao();
+			dao.countMobil(getTransaksi());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
