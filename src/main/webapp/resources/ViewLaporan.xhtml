@@ -53,10 +53,21 @@
 						<div class="row">
 							<div class="col-md-12">
 								<h:outputText
-									value="Pengelolaan Operator, #{LoginController.operator.namaPengguna} " />
-								<p:commandButton styleClass="btn btn-default" ajax="false"
-									outcome="productDetail" icon="ui-icon-power" title="Logout"
-									action="#{LoginController.doLogout}">
+									value="Laporan, #{LoginController.operator.namaPengguna} " />
+								<p:commandButton styleClass="btn btn-default"
+									onclick="confirmation.show()" outcome="productDetail"
+									icon="ui-icon-power" title="Logout">
+									<p:growl id="messages" showDetail="true" />
+									<p:confirmDialog message="Anda yankin akan Logout?"
+										hideEffect="explode" header="Hapus Anggota" severity="alert"
+										widgetVar="confirmation">
+
+										<p:commandButton value="Ya" oncomplete="confirmation.hide()"
+											action="#{LoginController.doLogout}" ajax="false">
+										</p:commandButton>
+										<p:commandButton value="Tidak" onclick="confirmation.hide()"
+											type="button" />
+									</p:confirmDialog>
 								</p:commandButton>
 							</div>
 						</div>
@@ -66,30 +77,24 @@
 				<div class="whitebox bxlogin">
 					<div class="row">
 						<div class="col-md-6 ">
-
-							<!-- texfield dari tanngal -->
-							<div class="col-xs-2">
-								<p:outputPanel styleClass="input-group input-group-lg">
-									<p:outputPanel styleClass="input-group-addon">
-										<p:outputPanel styleClass="glyphicon glyphicon-calendar"></p:outputPanel>
-									</p:outputPanel>
-									<p:calendar id="calDari" styleClass="form-control" />
-									<p:watermark for="calDari" value="Dari tanggal" />
-								</p:outputPanel>
+						
+							<!-- calender dari tanggal -->
+							<div class="row">
+								<span class="glyphicon glyphicon-calendar iconCal"></span>
+								<p:calendar id="calDari" styleClass="fontLap"/>
+								<p:watermark for="calDari" value="Dari tanggal" />
 							</div>
-
+							
 						</div>
-						<div class="col-md-6">
-
-							<!-- texfield sampai tanggal -->
-							<p:outputPanel styleClass="input-group input-group-lg">
-								<p:outputPanel styleClass="input-group-addon">
-									<p:outputPanel styleClass="glyphicon glyphicon-calendar"></p:outputPanel>
-								</p:outputPanel>
-								<p:calendar id="calSampai" styleClass="form-control" />
+						<div class="col-md-6 ">
+						
+							<!-- calender samapi tanggal -->
+							<div class="row">
+								<span class="glyphicon glyphicon-calendar iconCal"></span>
+								<p:calendar id="calSampai" styleClass="fontLap"/>
 								<p:watermark for="calSampai" value="Sampai tanggal" />
-							</p:outputPanel>
-
+							</div>
+							
 						</div>
 					</div>
 
@@ -108,9 +113,10 @@
 
 					<!-- button unduh -->
 					<div class="row">
-						<div class="col-md-6 col-md-offset-4">
-							<p:commandButton value="Unduh"
-								styleClass="btn btn-warning btnunduh kiri" />
+						<div class="col-md-6 col-md-offset-3">
+							<p:commandButton ajax="false"
+								actionListener="#{Transaksi.updateTransaksi}"
+								styleClass="btn btn-warning btncetak" value="Unduh" />
 						</div>
 					</div>
 

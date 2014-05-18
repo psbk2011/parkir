@@ -15,15 +15,13 @@
 			<div class="col-md-6 col-md-offset-3">
 
 				<!-- tag selamat datang -->
-				<p:outputPanel styleClass="tag taglogin">
-					<h:outputText value="Selamat datang" />
+				<p:outputPanel styleClass="tag tagMasuk">
+					<h:outputText value="Informasi" />
 				</p:outputPanel>
 				<div class="whitebox">
 
 					<!-- judul informasi -->
-					<span class="tiketjudul"><center>
-							<h:outputText value="Informasi ketersediaan" />
-						</center></span>
+					<span class="tiketjudul"><center></center></span>
 					<div class="col-md-6 col-md-offset-3">
 						<p:outputPanel styleClass="tiketjudul">
 							<h:outputText value="Parkir Motor" />
@@ -38,18 +36,22 @@
 					<!-- waktu dinamis -->
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3">
-							<p:outputPanel styleClass="glyphicon glyphicon-calendar" />
-							:
-							<p:clock pattern="dd.MM.yyyy" mode="server" />
-							<p:outputPanel styleClass="glyphicon glyphicon-time" />
-							:
-							<p:clock pattern="HH:mm:ss" mode="server" />
+							<p:outputPanel styleClass="glyphicon glyphicon-calendar iconCal" />
+							<h:outputText value=" Tanggal" styleClass="font22" />
+							<br />
+							<p:clock pattern="dd.MM.yyyy" mode="server" styleClass="fontLap" />
+							<br />
+							<p:outputPanel
+								styleClass="glyphicon glyphicon-time margin iconCal" />
+							<h:outputText value=" Jam" styleClass="font22" />
+							<br />
+							<p:clock pattern="HH:mm:ss" mode="server" styleClass="font22" />
 						</div>
 					</div>
 
 					<!-- button tiket motor -->
 					<p:commandButton action="#{Transaksi.print_motor}" ajax="false"
-						value="Tiket Motor" styleClass="btn btn-warning btncetak" />
+						value="Tiket Motor" styleClass="btn btn-warning btncetak margin" />
 
 				</div>
 			</div>

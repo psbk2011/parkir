@@ -55,6 +55,10 @@ body {
 	margin-top: 50px;
 }
 
+.tagMasuk {
+	margin-top: 10px;
+}
+
 .whitebox {
 	margin: 0px;
 	padding: 20px 0;
@@ -220,6 +224,16 @@ body {
 	font-size: 20px;
 }
 
+.fontLap {
+	font-size: 20px;
+	widht:10px;
+}
+
 .marginRadio {
 	margin-right: 10px;
+}
+
+.iconCal{
+	font-size: 30px;
+	padding-right: 10px;
 }
