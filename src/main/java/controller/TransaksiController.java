@@ -17,18 +17,17 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.print.Doc;
-import javax.print.DocFlavor;
-import javax.print.DocPrintJob;
-import javax.print.PrintService;
-import javax.print.PrintServiceLookup;
-import javax.print.SimpleDoc;
-import javax.print.attribute.HashPrintRequestAttributeSet;
-import javax.print.attribute.PrintRequestAttributeSet;
-import javax.print.attribute.standard.Sides;
+
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPageable;
+
+import model.Transaksi;
+//
+//import org.apache.pdfbox.pdmodel.PDDocument;
+//import org.apache.pdfbox.pdmodel.PDPageable;
+
+
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
@@ -48,7 +47,8 @@ public class TransaksiController implements Serializable {
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private static final long serialVersionUID = 1L;
-	private model.Transaksi transaksi;
+	private Transaksi transaksi;
+	private int jumlahMotor;
 
 	public TransaksiController() {
 		transaksi = new model.Transaksi();
@@ -60,6 +60,14 @@ public class TransaksiController implements Serializable {
 
 	public void setTransaksi(model.Transaksi transaksi) {
 		this.transaksi = transaksi;
+	}
+
+	public int getJumlahMotor() {
+		return jumlahMotor;
+	}
+
+	public void setJumlahMotor(int jumlahMotor) {
+		this.jumlahMotor = jumlahMotor;
 	}
 
 	public void resetTransaksi() {
@@ -106,9 +114,9 @@ public class TransaksiController implements Serializable {
 			PrinterJob job = PrinterJob.getPrinterJob();
 			PageFormat pf = job.defaultPage();
 
-			PDDocument document = PDDocument.load("d:/tmp/" + pdfFilename
-					+ ".pdf");
-			job.setPageable(new PDPageable(document, job));
+			 PDDocument document = PDDocument.load("e:/tmp/" + pdfFilename
+			 + ".pdf");
+			 job.setPageable(new PDPageable(document, job));
 
 			job.setJobName(pdfFilename + ".pdf");
 			try {
@@ -180,6 +188,7 @@ public class TransaksiController implements Serializable {
 			} else {
 				TransaksiDao dao = new TransaksiDao();
 				dao.cariBarcode(getTransaksi());
+				updateTransaksi();
 				resetTransaksi();
 				// dao.updateTransaksi(getTransaksi());
 			}
@@ -204,6 +213,15 @@ public class TransaksiController implements Serializable {
 		}
 		TransaksiDao dao = new TransaksiDao();
 		dao.updateTransaksi(getTransaksi());
+	}
+
+	public void countMotor() {
+		try {
+			TransaksiDao dao = new TransaksiDao();
+			dao.countMotor();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 }

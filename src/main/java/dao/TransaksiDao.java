@@ -1,19 +1,43 @@
 package dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import hibernate.HibernateUtils;
 import model.Transaksi;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import org.hibernate.id.uuid.Helper;
+import org.jboss.jandex.Main;
 
-public class TransaksiDao {
+@ManagedBean
+@SessionScoped
+public class TransaksiDao implements Serializable {
+
+	private int jumlahMotor = 100;
+	
+
+	public TransaksiDao() {
+
+	}
+
+	public int getJumlahMotor() {
+		return jumlahMotor;
+	}
+
+	public void setJumlahMotor(int jumlahMotor) {
+		this.jumlahMotor = jumlahMotor;
+	}
 
 	public void addTransaksi(Transaksi transaksi) {
 		Transaction trns = null;
@@ -78,8 +102,8 @@ public class TransaksiDao {
 				updateTransaksi(transaksi);
 				FacesContext.getCurrentInstance().addMessage(
 						null,
-						new FacesMessage(FacesMessage.SEVERITY_INFO, "Barcode Ditemukan",
-								transaksi.getBarcode()));
+						new FacesMessage(FacesMessage.SEVERITY_INFO,
+								"Barcode Ditemukan", transaksi.getBarcode()));
 			} else {
 				FacesContext.getCurrentInstance().addMessage(
 						null,
@@ -98,6 +122,22 @@ public class TransaksiDao {
 		return cek;
 
 	}
+
+	public void countMotor() {
+		Session session = HibernateUtils.getSessionFactory().openSession();
+		Criteria criteria = session.createCriteria(Transaksi.class);
+		criteria.setProjection(Projections.rowCount());
+		@SuppressWarnings("rawtypes")
+		List list = criteria.list();
+		Object count = list.get(0);
 	
+		System.out.println("jumlah :" + count);
+
+	}
+
+	public static void main(String[] args) {
+		TransaksiDao o = new TransaksiDao();
+		o.countMotor();
+	}
 
 }

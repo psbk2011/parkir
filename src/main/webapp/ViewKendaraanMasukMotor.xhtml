@@ -13,13 +13,13 @@
 	<h:form>
 		<div class="container-full">
 			<div class="col-md-6 col-md-offset-3">
-			
+
 				<!-- tag selamat datang -->
 				<p:outputPanel styleClass="tag taglogin">
 					<h:outputText value="Selamat datang" />
 				</p:outputPanel>
 				<div class="whitebox">
-				
+
 					<!-- judul informasi -->
 					<span class="tiketjudul"><center>
 							<h:outputText value="Informasi ketersediaan" />
@@ -30,7 +30,8 @@
 						</p:outputPanel>
 						<div class="harga">
 							<span class="glyphicon glyphicon-tags"></span> <span
-								class="jmltiket"><h:outputText value="350" /></span>
+								class="jmltiket"><h:outputText
+									value="#{transaksiDao.jumlahMotor}"></h:outputText></span>
 						</div>
 					</div>
 
@@ -45,11 +46,11 @@
 							<p:clock pattern="HH:mm:ss" mode="server" />
 						</div>
 					</div>
-					
+
 					<!-- button tiket motor -->
-					<p:commandButton action="#{Transaksi.print_motor}" ajax="false" value="Tiket Motor"
-						styleClass="btn btn-warning btncetak" />
-						
+					<p:commandButton action="#{Transaksi.print_motor}" ajax="false"
+						value="Tiket Motor" styleClass="btn btn-warning btncetak" />
+
 				</div>
 			</div>
 		</div>
