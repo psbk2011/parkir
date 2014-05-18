@@ -80,7 +80,7 @@ public class AnggotaController implements java.io.Serializable {
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			AnggotaDao dao = new AnggotaDao();
-			dao.addAnggota(getAnggota());
+			dao.deleteAnggota(getAnggota());
 			context.addMessage(null, new FacesMessage("Sucess"));
 			clearAnggota();
 		} catch (Exception e) {
