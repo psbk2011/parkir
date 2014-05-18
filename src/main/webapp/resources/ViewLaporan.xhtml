@@ -56,19 +56,8 @@
 									value="Laporan, #{LoginController.operator.namaPengguna} " />
 								<p:commandButton styleClass="btn btn-default"
 									onclick="confirmation.show()" outcome="productDetail"
-									icon="ui-icon-power" title="Logout">
-									<p:growl id="messages" showDetail="true" />
-									<p:confirmDialog message="Anda yankin akan Logout?"
-										hideEffect="explode" header="Hapus Anggota" severity="alert"
-										widgetVar="confirmation">
-
-										<p:commandButton value="Ya" oncomplete="confirmation.hide()"
-											action="#{LoginController.doLogout}" ajax="false">
-										</p:commandButton>
-										<p:commandButton value="Tidak" onclick="confirmation.hide()"
-											type="button" />
-									</p:confirmDialog>
-								</p:commandButton>
+									icon="ui-icon-power" title="Logout"
+									action="#{LoginController.doLogout}" ajax="false" />
 							</div>
 						</div>
 					</h:form>
@@ -77,24 +66,24 @@
 				<div class="whitebox bxlogin">
 					<div class="row">
 						<div class="col-md-6 ">
-						
+
 							<!-- calender dari tanggal -->
 							<div class="row">
 								<span class="glyphicon glyphicon-calendar iconCal"></span>
-								<p:calendar id="calDari" styleClass="fontLap"/>
+								<p:calendar id="calDari" styleClass="fontLap" />
 								<p:watermark for="calDari" value="Dari tanggal" />
 							</div>
-							
+
 						</div>
 						<div class="col-md-6 ">
-						
+
 							<!-- calender samapi tanggal -->
 							<div class="row">
 								<span class="glyphicon glyphicon-calendar iconCal"></span>
-								<p:calendar id="calSampai" styleClass="fontLap"/>
+								<p:calendar id="calSampai" styleClass="fontLap" />
 								<p:watermark for="calSampai" value="Sampai tanggal" />
 							</div>
-							
+
 						</div>
 					</div>
 
