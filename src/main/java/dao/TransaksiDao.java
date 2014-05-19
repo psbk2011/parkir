@@ -104,7 +104,7 @@ public class TransaksiDao {
 	public void countMotor(Transaksi transaksi) {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		try {
-			String SQL_QUERY = "SELECT COUNT(*) FROM Transaksi WHERE tipe_kendaraan = 'Motor'";
+			String SQL_QUERY = "SELECT COUNT(*) FROM Transaksi WHERE tipe_kendaraan = 'Motor' and waktu_keluar is null";
 			Query query = session.createQuery(SQL_QUERY);
 
 			for (Iterator it = query.iterate(); it.hasNext();) {
@@ -120,7 +120,7 @@ public class TransaksiDao {
 	public void countMobil(Transaksi transaksi) {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		try {
-			String SQL_QUERY = "SELECT COUNT(*) FROM Transaksi WHERE tipe_kendaraan = 'Mobil'";
+			String SQL_QUERY = "SELECT COUNT(*) FROM Transaksi WHERE tipe_kendaraan = 'Mobil' and waktu_keluar is null";
 			Query query = session.createQuery(SQL_QUERY);
 
 			for (Iterator it = query.iterate(); it.hasNext();) {
