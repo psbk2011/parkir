@@ -4,7 +4,7 @@
 <!-- Generated May 2, 2014 10:14:13 AM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="model.Log" table="log" catalog="parkir_unpas">
-        <id name="idlog" type="int">
+        <id name="idlog" type="java.lang.Integer">
             <column name="idlog" />
             <generator class="assigned" />
         </id>

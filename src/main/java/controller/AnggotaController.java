@@ -11,7 +11,6 @@ import javax.faces.context.FacesContext;
 
 import model.Anggota;
 import dao.AnggotaDao;
-import dao.TransaksiDao;
 
 @ManagedBean(name = "AnggotaController")
 @SessionScoped
@@ -48,18 +47,14 @@ public class AnggotaController implements java.io.Serializable {
 	public void saveAnggota() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
-			if (anggota.getIdAnggota().isEmpty()) {
-				FacesContext.getCurrentInstance().addMessage(
-						null,
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erorr",
-								"id tidak boleh kosong"));
-			} else if (anggota.getNamaLengkap().isEmpty()) {
+			if (anggota.getNamaLengkap().isEmpty()) {
 				FacesContext.getCurrentInstance().addMessage(
 						null,
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erorr",
 								"nama tidak boleh kosong"));
 			} else {
 				this.anggota.setBarcode(barcodeGen());
+				this.anggota.setIdAnggota("ANG" + GenerateId());
 				AnggotaDao dao = new AnggotaDao();
 				dao.addAnggota(getAnggota());
 				clearAnggota();
@@ -119,5 +114,15 @@ public class AnggotaController implements java.io.Serializable {
 
 		return barcode;
 	}
+
+	public int GenerateId() {
+		int randomId = 0;
+		Random rand = new Random();
+		for (int j = 0; j < 4; j++) {
+			randomId = rand.nextInt();
+		}
+		return randomId;
+	}
+
 
 }
