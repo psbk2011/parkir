@@ -160,33 +160,6 @@ public class TransaksiController implements Serializable {
 		resetTransaksi();
 	}
 
-	public void cariBarcode() {
-		try {
-			if (transaksi.getBarcode().isEmpty()) {
-				FacesContext.getCurrentInstance().addMessage(
-						null,
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erorr",
-								"Barcode Tidak boleh Kosong"));
-			} else if (transaksi.getNoPolisi().isEmpty()) {
-				FacesContext.getCurrentInstance().addMessage(
-						null,
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erorr",
-								"No Polisi Tidak boleh Kosong"));
-			} else {
-				TransaksiDao dao = new TransaksiDao();
-				dao.cariBarcode(getTransaksi());
-				updateTransaksi();
-				resetTransaksi();
-			}
-
-		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erorr",
-							"Failed"));
-		}
-	}
-
 	public void updateTransaksi() {
 		TransaksiDao dao = new TransaksiDao();
 		List<Transaksi> list = new ArrayList<Transaksi>();
@@ -197,7 +170,7 @@ public class TransaksiController implements Serializable {
 				Date date = new Date();
 				sdf.format(date);
 				getTransaksi().setWaktuKeluar(date);
-				getTransaksi().setTotalPembayaran(1000);
+				getTransaksi().setTotalBiaya(1000);
 				getTransaksi().setTipeBayar("Cash");
 				dao.updateTransaksi(getTransaksi());
 			} else {
