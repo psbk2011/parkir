@@ -21,7 +21,7 @@ public class TestCaseTransaksi {
 		transaksi.setBarcode(barcode);
 		transaksi.setNoPolisi("113040045");
 		controller.setTransaksi(transaksi);
-		controller.cariBarcode(null);
+		controller.updateTransaksi();
 	}
 	
 	@Test
