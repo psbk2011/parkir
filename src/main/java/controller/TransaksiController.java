@@ -42,11 +42,15 @@ public class TransaksiController implements Serializable {
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private Transaksi transaksi;
+	private String noPol;
+	private int totBiaya;
+	private int totBayar;
+	private int cashBack;
 
 	public TransaksiController() {
-		transaksi = new model.Transaksi();
-		countMotor();
+		transaksi = new Transaksi();
 		countMobil();
+		countMotor();
 	}
 
 	public Transaksi getTransaksi() {
@@ -55,6 +59,38 @@ public class TransaksiController implements Serializable {
 
 	public void setTransaksi(model.Transaksi transaksi) {
 		this.transaksi = transaksi;
+	}
+
+	public String getNoPol() {
+		return noPol;
+	}
+
+	public void setNoPol(String noPol) {
+		this.noPol = noPol;
+	}
+
+	public int getTotBiaya() {
+		return totBiaya;
+	}
+
+	public void setTotBiaya(int totBiaya) {
+		this.totBiaya = totBiaya;
+	}
+
+	public int getTotBayar() {
+		return totBayar;
+	}
+
+	public void setTotBayar(int totBayar) {
+		this.totBayar = totBayar;
+	}
+
+	public int getCashBack() {
+		return cashBack;
+	}
+
+	public void setCashBack(int cashBack) {
+		this.cashBack = cashBack;
 	}
 
 	public void resetTransaksi() {
@@ -119,11 +155,6 @@ public class TransaksiController implements Serializable {
 		}
 	}
 
-	public static void main(String[] args) {
-		TransaksiController tc = new TransaksiController();
-		tc.printTiket("test.pdf");
-	}
-
 	public void print_mobil() {
 		try {
 			Date date = new Date();
@@ -170,8 +201,11 @@ public class TransaksiController implements Serializable {
 				Date date = new Date();
 				sdf.format(date);
 				getTransaksi().setWaktuKeluar(date);
-				getTransaksi().setTotalBiaya(1000);
 				getTransaksi().setTipeBayar("Cash");
+				this.transaksi.setNoPolisi(noPol);
+				this.transaksi.setTotalBiaya(1000);
+				this.cashBack = ((totBayar) - (1000));
+				this.transaksi.setTotalPembayaran(cashBack);
 				dao.updateTransaksi(getTransaksi());
 			} else {
 				System.out.println("gagal Update");

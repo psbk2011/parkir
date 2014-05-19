@@ -12,5 +12,6 @@
 		<mapping class="model.Transaksi" resource="model/Transaksi.hbm.xml" />
 		<mapping class="model.Operator" resource="model/Operator.hbm.xml" />
 		<mapping class="model.Anggota" resource="model/Anggota.hbm.xml"/>
+		<mapping class="model.Opsi" resource="model/Opsi.hbm.xml"/>
 	</session-factory>
 </hibernate-configuration>

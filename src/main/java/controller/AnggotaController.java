@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -11,6 +12,7 @@ import javax.faces.context.FacesContext;
 
 import model.Anggota;
 import dao.AnggotaDao;
+import dao.TransaksiDao;
 
 @SuppressWarnings("serial")
 @ManagedBean(name = "AnggotaController")
@@ -66,14 +68,16 @@ public class AnggotaController implements java.io.Serializable {
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erorr",
 								"nama tidak boleh kosong"));
 			} else {
-				AnggotaDao dao = new AnggotaDao();
-				dao.addAnggota(getAnggota());
-				clearAnggota();
-				context.addMessage(null, new FacesMessage("Sucess"));
+				this.anggota.setBarcode(barcodeGen());
+
 			}
 		} catch (Exception e) {
 			context.addMessage(null, new FacesMessage("Failed"));
 		}
+		AnggotaDao dao = new AnggotaDao();
+		dao.addAnggota(getAnggota());
+		clearAnggota();
+		context.addMessage(null, new FacesMessage("Sucess"));
 	}
 
 	public void deleteAnggota() {
@@ -113,6 +117,17 @@ public class AnggotaController implements java.io.Serializable {
 		}
 		return new ArrayList<Anggota>();
 
+	}
+
+	public int barcodeGen() {
+		Random ran = new Random();
+		int barcode = ran.nextInt(10);
+		TransaksiDao c = new TransaksiDao();
+		while (barcode != 11) {
+			barcode += ran.nextInt(10);
+		}
+
+		return barcode;
 	}
 
 }

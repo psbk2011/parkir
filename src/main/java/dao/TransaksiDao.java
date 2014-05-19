@@ -75,7 +75,6 @@ public class TransaksiDao {
 					+ transaksi.getBarcode() + "'";
 			list = session.createQuery(sqlQuery).list();
 			if (list.size() > 0) {
-				
 				FacesContext.getCurrentInstance().addMessage(
 						null,
 						new FacesMessage(FacesMessage.SEVERITY_INFO,
