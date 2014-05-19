@@ -86,7 +86,6 @@
 								<h:outputLabel for="Nama pengguna" value="Nama pengguna" />
 								<p:inputText styleClass="form-control"
 									value="#{operatorController.operator.namaLengkap}" />
-
 							</h:panelGrid>
 
 						</div>
@@ -114,7 +113,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<h:outputText
-								value="Pengelolaan Operator, #{LoginController.operator.namaPengguna} " />
+								value="Operator, #{LoginController.operator.namaPengguna} " />
 							<p:commandButton styleClass="btn btn-default"
 								outcome="productDetail" icon="ui-icon-power" title="Logout"
 								action="#{LoginController.doLogout}" ajax="false" />
@@ -123,8 +122,6 @@
 				</h:form>
 			</p:outputPanel>
 
-
-
 			<!-- Start Form Add operator -->
 			<h:form id="formAddOperator">
 				<div class="whitebox bxlogin">
@@ -132,7 +129,7 @@
 						<div class="col-md-6">
 
 							<!-- texfield nama penggguna -->
-							<p:outputPanel styleClass="input-group input-group-lg">
+							<p:outputPanel styleClass="input-group input-group-lg padding">
 								<p:outputPanel styleClass="input-group-addon">
 									<p:outputPanel styleClass="glyphicon glyphicon-user"></p:outputPanel>
 								</p:outputPanel>
@@ -141,6 +138,24 @@
 								<p:watermark for="usernameOp" value="Nama Pengguna" />
 							</p:outputPanel>
 
+						</div>
+						<div class="col-md-6">
+
+							<!-- texfield kata sandi -->
+							<p:outputPanel styleClass="input-group input-group-lg padding">
+								<p:outputPanel styleClass="input-group-addon">
+									<p:outputPanel styleClass="glyphicon glyphicon-lock"></p:outputPanel>
+								</p:outputPanel>
+								<p:inputText value="#{operatorController.operator.kataSandi}"
+									id="passwordOp" label="passwordOp" styleClass="form-control" />
+								<p:watermark for="passwordOp" value="Kata sandi" />
+							</p:outputPanel>
+
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+						
 							<!-- texfield nama asli -->
 							<p:outputPanel styleClass="input-group input-group-lg margin">
 								<p:outputPanel styleClass="input-group-addon">
@@ -150,21 +165,7 @@
 									id="namaAsli" label="namaAsli" styleClass="form-control" />
 								<p:watermark for="namaAsli" value="Nama Asli" />
 							</p:outputPanel>
-
-						</div>
-
-						<div class="col-md-6">
-
-							<!-- texfield nama asli -->
-							<p:outputPanel styleClass="input-group input-group-lg">
-								<p:outputPanel styleClass="input-group-addon">
-									<p:outputPanel styleClass="glyphicon glyphicon-info-sign"></p:outputPanel>
-								</p:outputPanel>
-								<p:inputText value="#{operatorController.operator.kataSandi}"
-									id="passwordOp" label="passwordOp" styleClass="form-control" />
-								<p:watermark for="passwordOp" value="Kata sandi" />
-							</p:outputPanel>
-
+							
 						</div>
 					</div>
 
@@ -173,9 +174,10 @@
 						<div class="col-md-6 col-md-offset-3">
 							<p:commandButton value="Tambah" ajax="false"
 								actionListener="#{operatorController.saveOperator}"
-								styleClass="btn btn-warning btncetak" />
+								styleClass="btn btn-warning btncetak margin" />
 						</div>
 					</div>
+					
 				</div>
 			</h:form>
 			<!-- End Form Operator -->

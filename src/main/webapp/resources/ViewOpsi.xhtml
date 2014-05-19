@@ -43,7 +43,6 @@
 				</div>
 
 			</div>
-
 			<div class="col-md-6">
 
 				<!-- label tag kanan opsi -->
@@ -52,10 +51,9 @@
 						<div class="row">
 							<div class="col-md-12">
 								<h:outputText
-									value="Pengelolaan Opsi, #{LoginController.operator.namaPengguna} " />
+									value="Opsi, #{LoginController.operator.namaPengguna} " />
 								<p:commandButton styleClass="btn btn-default"
-									onclick="confirmation.show()" outcome="productDetail"
-									icon="ui-icon-power" title="Logout"
+									outcome="productDetail" icon="ui-icon-power" title="Logout"
 									action="#{LoginController.doLogout}" ajax="false" />
 							</div>
 						</div>
@@ -66,19 +64,18 @@
 					<div class="col-md-6 ">
 
 						<!-- texfield kapasitas motor -->
-						<p:outputPanel styleClass="input-group input-group-lg">
+						<p:outputPanel styleClass="input-group input-group-lg padding">
 							<p:outputPanel styleClass="input-group-addon">
-								<p:outputPanel styleClass="glyphicon glyphicon-wrench"></p:outputPanel>
+								<p:outputPanel styleClass="glyphicon glyphicon-cog"></p:outputPanel>
 							</p:outputPanel>
 							<p:inputText id="motor" styleClass="form-control" />
 							<p:watermark for="motor" value="Kapasistas Motor" />
 						</p:outputPanel>
 
-
 						<!-- texfield kapasitas mobil -->
 						<p:outputPanel styleClass="input-group input-group-lg margin">
 							<p:outputPanel styleClass="input-group-addon">
-								<p:outputPanel styleClass="glyphicon glyphicon-wrench"></p:outputPanel>
+								<p:outputPanel styleClass="glyphicon glyphicon-cog"></p:outputPanel>
 							</p:outputPanel>
 							<p:inputText id="mobil" styleClass="form-control" />
 							<p:watermark for="mobil" value="Kapasistas Mobil" />
@@ -87,32 +84,45 @@
 					</div>
 					<div class="col-md-6">
 
-						<!-- texfield kapasitas motor -->
-						<p:outputPanel styleClass="input-group input-group-lg">
+						<!-- texfield harga motor -->
+						<p:outputPanel styleClass="input-group input-group-lg padding">
 							<p:outputPanel styleClass="input-group-addon">
-								<p:outputPanel styleClass="glyphicon glyphicon-cog"></p:outputPanel>
+								<p:outputPanel styleClass="glyphicon glyphicon-usd"></p:outputPanel>
 							</p:outputPanel>
 							<p:inputText id="hrgMotor" styleClass="form-control" />
 							<p:watermark for="hrgMotor" value="Harga Per-Hari Motor" />
 						</p:outputPanel>
 
-
-						<!-- texfield kapasitas mobil -->
+						<!-- texfield harga mobil -->
 						<p:outputPanel styleClass="input-group input-group-lg margin">
 							<p:outputPanel styleClass="input-group-addon">
-								<p:outputPanel styleClass="glyphicon glyphicon-cog"></p:outputPanel>
+								<p:outputPanel styleClass="glyphicon glyphicon-usd"></p:outputPanel>
 							</p:outputPanel>
 							<p:inputText id="hrgMobil" styleClass="form-control" />
 							<p:watermark for="hrgMobil" value="Harga Per-Hari Mobil" />
 						</p:outputPanel>
 
+
+					</div>
+					<div class="col-md-6">
+					
+						<!-- texfield path -->
+						<p:outputPanel styleClass="input-group input-group-lg margin">
+							<p:outputPanel styleClass="input-group-addon">
+								<p:outputPanel styleClass="glyphicon glyphicon-road"></p:outputPanel>
+							</p:outputPanel>
+							<p:inputText id="path" styleClass="form-control" />
+							<p:watermark for="path" value="Path tmp" />
+						</p:outputPanel>
+						
 					</div>
 
 					<!-- button simpan -->
 					<div class="row">
-						<div class="col-md-6 col-md-offset-4">
-							<p:commandButton value="Simpan"
-								styleClass="btn btn-warning btnunduh kiri" />
+						<div class="col-md-6 col-md-offset-3">
+							<p:commandButton value="Simpan" ajax="false"
+								actionListener="#{operatorController.saveOperator}"
+								styleClass="btn btn-warning btncetak margin" />
 						</div>
 					</div>
 

@@ -114,10 +114,9 @@
 					<div class="row">
 						<div class="col-md-12">
 							<h:outputText
-								value="Pengelolaan Anggota, #{LoginController.operator.namaPengguna} " />
+								value="Anggota, #{LoginController.operator.namaPengguna} " />
 							<p:commandButton styleClass="btn btn-default"
-								toutcome="productDetail"
-								icon="ui-icon-power" title="Logout"
+								outcome="productDetail" icon="ui-icon-power" title="Logout"
 								action="#{LoginController.doLogout}" ajax="false" />
 
 						</div>
@@ -133,18 +132,8 @@
 					<div class="row">
 						<div class="col-md-6">
 
-							<!-- texfield barcode -->
-							<p:outputPanel styleClass="input-group input-group-lg">
-								<p:outputPanel styleClass="input-group-addon">
-									<p:outputPanel styleClass="glyphicon glyphicon-barcode"></p:outputPanel>
-								</p:outputPanel>
-								<p:inputText value="#{AnggotaController.anggota.barcode}"
-									id="barcode" label="barcode" styleClass="form-control" />
-								<p:watermark for="barcode" value="Barcode" />
-							</p:outputPanel>
-
 							<!-- texfield id anggota -->
-							<p:outputPanel styleClass="input-group input-group-lg margin">
+							<p:outputPanel styleClass="input-group input-group-lg padding">
 								<p:outputPanel styleClass="input-group-addon">
 									<p:outputPanel styleClass="glyphicon glyphicon-align-justify"></p:outputPanel>
 								</p:outputPanel>
@@ -154,11 +143,10 @@
 							</p:outputPanel>
 
 						</div>
-
 						<div class="col-md-6">
 
 							<!-- texfield nama lengkap -->
-							<p:outputPanel styleClass="input-group input-group-lg">
+							<p:outputPanel styleClass="input-group input-group-lg padding">
 								<p:outputPanel styleClass="input-group-addon">
 									<p:outputPanel styleClass="glyphicon glyphicon-user"></p:outputPanel>
 								</p:outputPanel>
@@ -170,14 +158,31 @@
 						</div>
 					</div>
 
+					<div class="row">
+						<div class="col-md-6">
+
+							<!-- texfield barcode -->
+							<p:outputPanel styleClass="input-group input-group-lg margin">
+								<p:outputPanel styleClass="input-group-addon">
+									<p:outputPanel styleClass="glyphicon glyphicon-barcode"></p:outputPanel>
+								</p:outputPanel>
+								<p:inputText disabled="true" id="barcode" label="barcode"
+									styleClass="form-control" />
+								<p:watermark for="barcode" value="Barcode" />
+							</p:outputPanel>
+
+						</div>
+					</div>
+
 					<!-- button tambah -->
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3">
 							<p:commandButton value="Tambah" ajax="false"
 								actionListener="#{AnggotaController.saveAnggota}"
-								styleClass="btn btn-warning btncetak" />
+								styleClass="btn btn-warning btncetak margin" />
 						</div>
 					</div>
+					
 				</div>
 			</h:form>
 			<!-- End Form Operator -->
