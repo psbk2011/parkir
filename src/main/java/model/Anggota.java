@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @SessionScoped
 public class Anggota implements java.io.Serializable {
 
-	private int barcode;
+	private String barcode;
 	private String idAnggota;
 	private String namaLengkap;
 
@@ -25,23 +25,23 @@ public class Anggota implements java.io.Serializable {
 	public Anggota() {
 	}
 
-	public Anggota(int barcode, String idAnggota) {
+	public Anggota(String barcode, String idAnggota) {
 		this.barcode = barcode;
 		this.idAnggota = idAnggota;
 	}
 
-	public Anggota(int barcode, String idAnggota, String namaLengkap) {
+	public Anggota(String barcode, String idAnggota, String namaLengkap) {
 		this.barcode = barcode;
 		this.idAnggota = idAnggota;
 		this.namaLengkap = namaLengkap;
 
 	}
 
-	public int getBarcode() {
+	public String getBarcode() {
 		return this.barcode;
 	}
 
-	public void setBarcode(int barcode) {
+	public void setBarcode(String barcode) {
 		this.barcode = barcode;
 	}
 

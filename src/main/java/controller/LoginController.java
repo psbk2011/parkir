@@ -1,5 +1,9 @@
 package controller;
 
+import java.security.MessageDigest;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -20,8 +24,9 @@ public class LoginController {
 	private NavigationBean navigationBean;
 
 	public LoginController() {
+		daoLogin = new LoginDao(this);
 		operator = new Operator();
-		daoLogin = new LoginDao();
+		
 	}
 
 	public Operator getOperator() {
@@ -99,7 +104,7 @@ public class LoginController {
 				} else if (menu.equals("Opsi")) {
 					isLoggedIn = true;
 					return navigationBean.redirectOpsi();
-				}else if(menu.equals("Anggota")){
+				} else if (menu.equals("Anggota")) {
 					isLoggedIn = true;
 					return navigationBean.redirectToAnggota();
 				} else if (menu.equals("Laporan")) {
@@ -129,7 +134,7 @@ public class LoginController {
 	public void doMasukMotor() {
 		try {
 			FacesContext.getCurrentInstance().getExternalContext()
-			.redirect("ViewKendaraanMasukMotor.jsf");
+					.redirect("ViewKendaraanMasukMotor.jsf");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -138,9 +143,37 @@ public class LoginController {
 	public void doMasukMobil() {
 		try {
 			FacesContext.getCurrentInstance().getExternalContext()
-			.redirect("ViewKendaraanMasukMobil.jsf");
+					.redirect("ViewKendaraanMasukMobil.jsf");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+	}
+
+	public String getMD5(String str) {
+		if (str == null || str.length() == 0) {
+			throw new IllegalArgumentException(
+					"String to encrip cannot be null");
+
+		}
+		MessageDigest digester = null;
+		try {
+			digester = MessageDigest.getInstance("MD5");
+		} catch (Exception ex) {
+			Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE,
+					null, ex);
+		}
+		digester.update(str.getBytes());
+		byte[] hash = digester.digest();
+		StringBuilder hexString = new StringBuilder();
+		for (int i = 0; i < hash.length; i++) {
+			if ((0xff & hash[i]) < 0x10) {
+				hexString.append("0").append(
+						Integer.toHexString(0xFF & hash[i]));
+
+			} else {
+				hexString.append(Integer.toHexString(0xFF & hash[i]));
+			}
+		}
+		return hexString.toString();
 	}
 }

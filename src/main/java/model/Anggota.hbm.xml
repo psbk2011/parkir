@@ -4,7 +4,7 @@
 <!-- Generated May 2, 2014 10:14:13 AM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="model.Anggota" table="anggota" catalog="parkir_unpas">
-        <id name="barcode" type="int">
+        <id name="barcode" type="string">
             <column name="barcode" />
             <generator class="assigned" />
         </id>
