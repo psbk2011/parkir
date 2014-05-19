@@ -1,5 +1,8 @@
 package dao;
+
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -61,22 +64,23 @@ public class TransaksiDao {
 		}
 	}
 
-	public boolean cariBarcode(Transaksi transaksi) {
+	@SuppressWarnings("unchecked")
+	public List<Transaksi> cariBarcode(Transaksi transaksi) {
+		List<Transaksi> list = new ArrayList<Transaksi>();
 		Transaction trns = null;
-		boolean cek = false;
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		try {
 			trns = session.beginTransaction();
 			String sqlQuery = "FROM Transaksi WHERE barcode = '"
 					+ transaksi.getBarcode() + "'";
-			Query query = session.createQuery(sqlQuery);
-			if (!query.list().isEmpty()) {
-				cek = true;
-				updateTransaksi(transaksi);
+			list = session.createQuery(sqlQuery).list();
+			if (list.size() > 0) {
+				
 				FacesContext.getCurrentInstance().addMessage(
 						null,
 						new FacesMessage(FacesMessage.SEVERITY_INFO,
 								"Barcode Ditemukan", transaksi.getBarcode()));
+				return list;
 			} else {
 				FacesContext.getCurrentInstance().addMessage(
 						null,
@@ -92,7 +96,7 @@ public class TransaksiDao {
 			}
 			System.out.println("Erorr : " + e.getMessage());
 		}
-		return cek;
+		return list;
 
 	}
 

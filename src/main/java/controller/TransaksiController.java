@@ -6,7 +6,9 @@ import java.awt.print.PrinterJob;
 import java.io.FileOutputStream;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import javax.faces.application.FacesMessage;
@@ -158,7 +160,7 @@ public class TransaksiController implements Serializable {
 		resetTransaksi();
 	}
 
-	public void cariBarcode(ActionEvent actionEvent) {
+	public void cariBarcode() {
 		try {
 			if (transaksi.getBarcode().isEmpty()) {
 				FacesContext.getCurrentInstance().addMessage(
@@ -175,7 +177,6 @@ public class TransaksiController implements Serializable {
 				dao.cariBarcode(getTransaksi());
 				updateTransaksi();
 				resetTransaksi();
-				// dao.updateTransaksi(getTransaksi());
 			}
 
 		} catch (Exception e) {
@@ -187,17 +188,26 @@ public class TransaksiController implements Serializable {
 	}
 
 	public void updateTransaksi() {
+		TransaksiDao dao = new TransaksiDao();
+		List<Transaksi> list = new ArrayList<Transaksi>();
 		try {
-			Date date = new Date();
-			sdf.format(date);
-			this.transaksi.setWaktuKeluar(date);
-			this.transaksi.setTotalPembayaran(1000);
+			list = dao.cariBarcode(getTransaksi());
+			if (list.size() > 0) {
+				setTransaksi(list.get(0));
+				Date date = new Date();
+				sdf.format(date);
+				getTransaksi().setWaktuKeluar(date);
+				getTransaksi().setTotalPembayaran(1000);
+				getTransaksi().setTipeBayar("Cash");
+				dao.updateTransaksi(getTransaksi());
+			} else {
+				System.out.println("gagal Update");
+			}
 
 		} catch (Exception e) {
 			System.out.println("Erorr Update karena : " + e.getMessage());
 		}
-		TransaksiDao dao = new TransaksiDao();
-		dao.updateTransaksi(getTransaksi());
+
 	}
 
 	public void countMotor() {
