@@ -2,11 +2,16 @@ package controller;
 
 import java.util.Random;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
 import dao.OperatorDao;
 import dao.OpsiDao;
 import dao.TransaksiDao;
 import model.Opsi;
 
+@ManagedBean(name = "Opsi")
+@SessionScoped
 public class OpsiController {
 	private Opsi opsi;
 
@@ -21,6 +26,12 @@ public class OpsiController {
 	public void setOpsi(Opsi opsi) {
 		this.opsi = opsi;
 	}
+	
+//	public int getValueOpsi() {
+//		OpsiDao od = new OpsiDao();
+//		od.getNilaiOpsi(opsi);
+//		return 0;
+//	}
 
 	public void saveOpsi() {
 		try {
@@ -48,6 +59,5 @@ public class OpsiController {
 			System.out.println("failed" + e.getMessage());
 		}
 	}
-	
 
 }

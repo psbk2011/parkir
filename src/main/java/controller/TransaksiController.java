@@ -8,8 +8,10 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -42,10 +44,14 @@ public class TransaksiController implements Serializable {
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private Transaksi transaksi;
-	private String noPol;
-	private int totBiaya;
-	private int totBayar;
-	private int cashBack;
+	private String barcode;
+	private String gambarMasuk;
+	private Date waktuKeluar;
+	private String gambarKeluar;
+	private Integer totalBiaya;
+	private Integer totalPembayaran;
+	private String noPolisi;
+	private String tipeBayar;
 
 	public TransaksiController() {
 		transaksi = new Transaksi();
@@ -61,44 +67,83 @@ public class TransaksiController implements Serializable {
 		this.transaksi = transaksi;
 	}
 
-	public String getNoPol() {
-		return noPol;
+	public SimpleDateFormat getSdf() {
+		return sdf;
 	}
 
-	public void setNoPol(String noPol) {
-		this.noPol = noPol;
+	public void setSdf(SimpleDateFormat sdf) {
+		this.sdf = sdf;
 	}
 
-	public int getTotBiaya() {
-		return totBiaya;
+	public String getBarcode() {
+		return barcode;
 	}
 
-	public void setTotBiaya(int totBiaya) {
-		this.totBiaya = totBiaya;
+	public void setBarcode(String barcode) {
+		this.barcode = barcode;
 	}
 
-	public int getTotBayar() {
-		return totBayar;
+	public String getGambarMasuk() {
+		return gambarMasuk;
 	}
 
-	public void setTotBayar(int totBayar) {
-		this.totBayar = totBayar;
+	public void setGambarMasuk(String gambarMasuk) {
+		this.gambarMasuk = gambarMasuk;
 	}
 
-	public int getCashBack() {
-		return cashBack;
+	public Date getWaktuKeluar() {
+		return waktuKeluar;
 	}
 
-	public void setCashBack(int cashBack) {
-		this.cashBack = cashBack;
+	public void setWaktuKeluar(Date waktuKeluar) {
+		this.waktuKeluar = waktuKeluar;
+	}
+
+	public String getGambarKeluar() {
+		return gambarKeluar;
+	}
+
+	public void setGambarKeluar(String gambarKeluar) {
+		this.gambarKeluar = gambarKeluar;
+	}
+
+	public Integer getTotalBiaya() {
+		return totalBiaya;
+	}
+
+	public void setTotalBiaya(Integer totalBiaya) {
+		this.totalBiaya = totalBiaya;
+	}
+
+	public Integer getTotalPembayaran() {
+		return totalPembayaran;
+	}
+
+	public void setTotalPembayaran(Integer totalPembayaran) {
+		this.totalPembayaran = totalPembayaran;
+	}
+
+	public String getNoPolisi() {
+		return noPolisi;
+	}
+
+	public void setNoPolisi(String noPolisi) {
+		this.noPolisi = noPolisi;
+	}
+
+	public String getTipeBayar() {
+		return tipeBayar;
+	}
+
+	public void setTipeBayar(String tipeBayar) {
+		this.tipeBayar = tipeBayar;
 	}
 
 	public void resetTransaksi() {
-		transaksi.setBarcode("");
-		transaksi.setNoPolisi("");
-		transaksi.setTipeBayar("");
-		transaksi.setTotalBiaya(0);
-
+		setBarcode("");
+		setNoPolisi("");
+		setTipeBayar("");
+		// setTotalBiaya(0);
 	}
 
 	public String barcodeGen() {
@@ -200,13 +245,44 @@ public class TransaksiController implements Serializable {
 				setTransaksi(list.get(0));
 				Date date = new Date();
 				sdf.format(date);
+
+				setWaktuKeluar(date);
 				getTransaksi().setWaktuKeluar(date);
-				getTransaksi().setTipeBayar("Cash");
-				this.transaksi.setNoPolisi(noPol);
-				this.transaksi.setTotalBiaya(1000);
-				this.cashBack = ((totBayar) - (1000));
-				this.transaksi.setTotalPembayaran(cashBack);
+
+				if (getTotalPembayaran() == -1) {
+					setTipeBayar("Anggota");
+					getTransaksi().setTipeBayar("Anggota");
+					setTotalBiaya(0);
+					getTransaksi().setTotalBiaya(0);
+				} else if (getTotalPembayaran() == -2) {
+					setTipeBayar("Bypass");
+					getTransaksi().setTipeBayar("Bypass");
+					setTotalBiaya(0);
+					getTransaksi().setTotalBiaya(0);
+				} else {
+					setTipeBayar("Cash");
+					getTransaksi().setTipeBayar("Cash");
+					if (getTotalPembayaran() == 0) {
+						if (getTransaksi().getTipeKendaraan().contains("Motor")) {
+							setTotalBiaya(1000);
+							getTransaksi().setTotalBiaya(1000);
+						} else {
+							setTotalBiaya(2000);
+							getTransaksi().setTotalBiaya(2000);
+						}
+					} else {
+						setTotalBiaya(totalPembayaran - getTotalBiaya());
+						getTransaksi().setTotalBiaya(getTotalBiaya());
+					}
+				}
+
+				setNoPolisi(noPolisi);
+				getTransaksi().setNoPolisi(noPolisi);
+
+				setTotalPembayaran(totalPembayaran);
+				getTransaksi().setTotalPembayaran(totalPembayaran);
 				dao.updateTransaksi(getTransaksi());
+
 			} else {
 				System.out.println("gagal Update");
 			}

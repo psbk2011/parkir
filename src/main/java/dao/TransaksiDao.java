@@ -71,8 +71,9 @@ public class TransaksiDao {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		try {
 			trns = session.beginTransaction();
+			String barcode = transaksi.getBarcode().substring(0, 22);
 			String sqlQuery = "FROM Transaksi WHERE barcode = '"
-					+ transaksi.getBarcode() + "'";
+					+ barcode + "'";
 			list = session.createQuery(sqlQuery).list();
 			if (list.size() > 0) {
 				FacesContext.getCurrentInstance().addMessage(

@@ -79,8 +79,7 @@
 								<h:outputText
 									value="Kendaraan Keluar, #{LoginController.operator.namaPengguna} " />
 								<p:commandButton styleClass="btn btn-default"
-									outcome="productDetail"
-									icon="ui-icon-power" title="Logout"
+									outcome="productDetail" icon="ui-icon-power" title="Logout"
 									action="#{LoginController.doLogout}" ajax="false" />
 							</div>
 						</div>
@@ -93,7 +92,7 @@
 					<h:outputText value="Harga : " />
 					<div class="harga">
 						<span class="glyphicon glyphicon-ok-circle "></span>
-						<h:outputText value="Rp.1000" />
+						<h:outputText value="#{Transaksi.totalBiaya}" />
 					</div>
 
 					<!-- texfield nopol -->
@@ -103,7 +102,7 @@
 							<p:outputPanel styleClass="glyphicon glyphicon-file"></p:outputPanel>
 						</p:outputPanel>
 						<p:inputText id="nopol" styleClass="form-control"
-							value="#{Transaksi.transaksi.noPolisi}" />
+							value="#{Transaksi.noPolisi}" />
 						<p:watermark for="nopol" value="Nomor Polisi" />
 					</div>
 
@@ -127,7 +126,7 @@
 							<p:outputPanel styleClass="glyphicon glyphicon-shopping-cart"></p:outputPanel>
 						</p:outputPanel>
 						<p:inputText id="total" styleClass="form-control"
-							value="#{Transaksi.transaksi.totalPembayaran}" />
+							value="#{Transaksi.totalPembayaran}" />
 						<p:watermark for="total" value="Total Bayar" />
 					</div>
 
@@ -136,8 +135,15 @@
 
 						<div class="col-md-6">
 							<p:commandButton ajax="false" type="reset"
-								styleClass="btn btn-warning btncetak margin" value="Reset" />
+								styleClass="btn btn-warning btncetak margin" value="Reset"
+								onclick="refreshPage()" />
 						</div>
+
+						<script>
+							function refreshPage() {
+								window.location.reload();
+							}
+						</script>
 
 						<div class="col-md-6">
 							<p:commandButton ajax="false"

@@ -46,7 +46,7 @@ public class Transaksi implements java.io.Serializable {
 	public Transaksi(int idtransaksi, String barcode, String tipeKendaraan,
 			Date waktuMasuk, String gambarMasuk, Date waktuKeluar,
 			String gambarKeluar, Integer totalBiaya, Integer totalPembayaran,
-			String noPolisi,String tipeBayar, String generateIdTiket) {
+			String noPolisi,String tipeBayar) {
 		this.idtransaksi = idtransaksi;
 		this.barcode = barcode;
 		this.tipeKendaraan = tipeKendaraan;
