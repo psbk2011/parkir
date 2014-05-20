@@ -54,7 +54,9 @@ body {
 .taglogin {
 	margin-top: 50px;
 }
-
+.white {
+	color: white;
+}
 .tagMasuk {
 	margin-top: 10px;
 }

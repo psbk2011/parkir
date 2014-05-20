@@ -40,28 +40,21 @@
 				<div class="whitebox">
 
 					<!-- kendaraan masuk -->
-					<div class="col-md-6">
-						<p:outputPanel styleClass="tag">
-							<h:outputText value="Masuk" />
+					<div class="col-md-5">
+						<p:outputPanel styleClass="tag white">
+							<h:outputText value="Masuk"/>
 						</p:outputPanel>
 						<img src="../image/parkir.jpg" class="img-thumbnail"></img>
 					</div>
 
 					<!-- kendaraan keluar -->
-					<div class="col-md-6">
-						<p:outputPanel styleClass="tag">
-							<h:outputText value="Keluar" />
+					<div class="col-md-7">
+						<p:outputPanel styleClass="tag white">
+							<h:outputText  value="Keluar" />
 						</p:outputPanel>
 						<h:form>
-							<h:panelGrid columns="3" class="img-thumbnail">
-								<p:photoCam widgetVar="pc" listener="#{photoCamBean.oncapture}"
-									update="photos" />
-
-								<p:imageSwitch effect="zoom" id="photos">
-									<ui:repeat value="#{photoCamBean.photos}" var="photo">
-										<p:graphicImage value="/photocam/#{photo}.png" />
-									</ui:repeat>
-								</p:imageSwitch>
+							<h:panelGrid columns="3">
+								<p:photoCam widgetVar="pc" listener="#{photoCamBean.oncapture}" />
 							</h:panelGrid>
 						</h:form>
 					</div>
