@@ -38,7 +38,6 @@ import com.lowagie.tools.Executable;
 import dao.TransaksiDao;
 
 @ManagedBean(name = "Transaksi")
-@SessionScoped
 @ViewScoped
 public class TransaksiController implements Serializable {
 
@@ -55,8 +54,8 @@ public class TransaksiController implements Serializable {
 
 	public TransaksiController() {
 		transaksi = new Transaksi();
-		countMobil();
-		countMotor();
+//		countMobil();
+//		countMotor();
 	}
 
 	public Transaksi getTransaksi() {
@@ -159,9 +158,10 @@ public class TransaksiController implements Serializable {
 
 	public void printTiket(String pdfFilename) {
 		try {
+			OpsiController oc = new OpsiController();
 			Document doc = new Document(PageSize.A9.rotate());
 			Executable ex = new Executable();
-			String path = "e:/tmp/" + pdfFilename + ".pdf";
+			String path = oc.get_pathtmp().toString() + pdfFilename + ".pdf";
 			PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream(
 					path));
 			doc.setMargins(10, 1, 10, 1);
@@ -182,7 +182,7 @@ public class TransaksiController implements Serializable {
 			PrinterJob job = PrinterJob.getPrinterJob();
 			PageFormat pf = job.defaultPage();
 
-			PDDocument document = PDDocument.load("e:/tmp/" + pdfFilename
+			PDDocument document = PDDocument.load(oc.get_pathtmp().toString() + pdfFilename
 					+ ".pdf");
 			job.setPageable(new PDPageable(document, job));
 
@@ -239,6 +239,7 @@ public class TransaksiController implements Serializable {
 	public void updateTransaksi() {
 		TransaksiDao dao = new TransaksiDao();
 		List<Transaksi> list = new ArrayList<Transaksi>();
+		OpsiController oc = new OpsiController();
 		try {
 			list = dao.cariBarcode(getTransaksi());
 			if (list.size() > 0) {
@@ -263,12 +264,24 @@ public class TransaksiController implements Serializable {
 					setTipeBayar("Cash");
 					getTransaksi().setTipeBayar("Cash");
 					if (getTotalPembayaran() == 0) {
+						
+						long waktumasuk = getTransaksi().getWaktuMasuk().getTime();
+						long waktukeluar = getWaktuKeluar().getTime();
+						long diff = waktumasuk - waktukeluar;
+						int hasil = (int) diff / (24 * 60 * 60 * 1000);
+						if (hasil == 0) {
+							hasil = 1;
+						} else if (hasil < 0) {
+							hasil = hasil * -1;
+						}
 						if (getTransaksi().getTipeKendaraan().contains("Motor")) {
-							setTotalBiaya(1000);
-							getTransaksi().setTotalBiaya(1000);
+							setTotalBiaya(Integer.parseInt(oc.get_hargamotor()) * hasil);
+							getTransaksi().setTotalBiaya(Integer.parseInt(oc.get_hargamotor()) * hasil);
+							System.out.println("Motor");
 						} else {
-							setTotalBiaya(2000);
-							getTransaksi().setTotalBiaya(2000);
+							setTotalBiaya(Integer.parseInt(oc.get_hargamobil()) * hasil);
+							getTransaksi().setTotalBiaya(Integer.parseInt(oc.get_hargamobil()) * hasil);
+							System.out.println("Mobil");
 						}
 					} else {
 						setTotalBiaya(totalPembayaran - getTotalBiaya());
@@ -293,22 +306,24 @@ public class TransaksiController implements Serializable {
 
 	}
 
-	public void countMotor() {
+	public String get_countMotor() {
 		try {
 			TransaksiDao dao = new TransaksiDao();
-			dao.countMotor(getTransaksi());
+			return dao.countMotor(getTransaksi());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		return null;
 	}
 
-	public void countMobil() {
+	public String get_countMobil() {
 		try {
 			TransaksiDao dao = new TransaksiDao();
-			dao.countMobil(getTransaksi());
+			return dao.countMobil(getTransaksi());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		return null;
 	}
 
 }

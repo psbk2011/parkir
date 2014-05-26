@@ -29,7 +29,7 @@
 						</p:outputPanel>
 						<div class="harga">
 							<span class="glyphicon glyphicon-tags"></span> <span
-								class="jmltiket"><h:outputText value="#{Transaksi.transaksi.jumlahMobil}" /></span>
+								class="jmltiket"><h:outputText value="#{Transaksi._countMobil}" /></span>
 						</div>
 					</div>
 
@@ -47,7 +47,7 @@
 					</div>
 					
 					<!-- button tiket motor -->
-					<p:commandButton value="Tiket Mobil" action="#{Transaksi.print_mobil}"
+					<p:commandButton value="Tiket Mobil" ajax="false" action="#{Transaksi.print_mobil}"
 						styleClass="btn btn-warning btncetak margin" />
 				</div>
 			</div>

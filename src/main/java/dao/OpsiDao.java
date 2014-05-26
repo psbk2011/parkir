@@ -10,6 +10,7 @@ import hibernate.HibernateUtils;
 import model.Opsi;
 import model.Transaksi;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -45,6 +46,16 @@ public class OpsiDao {
 		}
 		session.close();
 	}
+	
+	public void updateOpsiWhere(Opsi opsi) {
+		try {
+			Session session = HibernateUtils.getSessionFactory().openSession();
+			Query query = session.createSQLQuery("UPDATE Opsi SET nilai_opsi='"+opsi.getNilaiOpsi()+"' WHERE nama_opsi = '"
+					+ opsi.getNamaOpsi() + "'");
+		} catch (Exception e) {
+			System.out.println("Error Opsi Where : "  + e.getMessage());
+		}
+	}
 
 	public void deleteOpsi(Opsi opsi) {
 		Transaction trns = null;
@@ -62,22 +73,14 @@ public class OpsiDao {
 	}
 
 	public String getNilaiOpsi(Opsi opsi) {
-		List<Opsi> list = new ArrayList<Opsi>();
-		Transaction trns = null;
-		Session session = HibernateUtils.getSessionFactory().openSession();
 		try {
-			trns = session.beginTransaction();
-			String sqlQuery = "SELECT nilai_opsi FROM opsi WHERE nama_opsi = '"
-					+ opsi.getNamaOpsi() + "' LIMIT 1";
-			list = session.createQuery(sqlQuery).list();
-			return list.get(0).toString();
+			Session session = HibernateUtils.getSessionFactory().openSession();
+			Query query = session.createSQLQuery("SELECT nilai_opsi FROM Opsi WHERE nama_opsi = '"
+					+ opsi.getNamaOpsi() + "'");
+			List result = query.list();
+			return result.get(0).toString();
 		} catch (Exception e) {
-			if (trns != null) {
-				trns.rollback();
-			} else {
-
-			}
-			System.out.println("Erorr : " + e.getMessage());
+			System.out.println("Error DAO Cari : " + e.getMessage());
 		}
 		return null;
 	}

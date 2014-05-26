@@ -28,20 +28,6 @@
 					:
 					<p:clock pattern="HH:mm:ss" mode="server" />
 				</div>
-
-				<!-- label tag kiri status parkir -->
-				<p:outputPanel styleClass="tag">
-					<h:outputText value="Status Parkir" />
-				</p:outputPanel>
-				<div class="whitebox bxlogin">
-					<p:outputPanel styleClass="glyphicon glyphicon-road">
-					</p:outputPanel>
-					<h:outputText value="#{Opsi}" />
-					<p:outputPanel styleClass="glyphicon glyphicon-road">
-					</p:outputPanel>
-					<h:outputText value=" Motor : 800" />
-				</div>
-
 			</div>
 			<div class="col-md-6">
 
@@ -68,7 +54,7 @@
 							<p:outputPanel styleClass="input-group-addon">
 								<p:outputPanel styleClass="glyphicon glyphicon-cog"></p:outputPanel>
 							</p:outputPanel>
-							<p:inputText id="motor" styleClass="form-control" />
+							<p:inputText id="motor" value="#{Opsi._kapasitasmotor}" styleClass="form-control" />
 							<p:watermark for="motor" value="Kapasistas Motor" />
 						</p:outputPanel>
 
@@ -77,7 +63,7 @@
 							<p:outputPanel styleClass="input-group-addon">
 								<p:outputPanel styleClass="glyphicon glyphicon-cog"></p:outputPanel>
 							</p:outputPanel>
-							<p:inputText id="mobil" styleClass="form-control" />
+							<p:inputText id="mobil" value="#{Opsi._kapasitasmobil}" styleClass="form-control" />
 							<p:watermark for="mobil" value="Kapasistas Mobil" />
 						</p:outputPanel>
 
@@ -89,7 +75,7 @@
 							<p:outputPanel styleClass="input-group-addon">
 								<p:outputPanel styleClass="glyphicon glyphicon-usd"></p:outputPanel>
 							</p:outputPanel>
-							<p:inputText id="hrgMotor" styleClass="form-control" />
+							<p:inputText id="hrgMotor" value="#{Opsi._hargamotor}" styleClass="form-control" />
 							<p:watermark for="hrgMotor" value="Harga Per-Hari Motor" />
 						</p:outputPanel>
 
@@ -98,7 +84,7 @@
 							<p:outputPanel styleClass="input-group-addon">
 								<p:outputPanel styleClass="glyphicon glyphicon-usd"></p:outputPanel>
 							</p:outputPanel>
-							<p:inputText id="hrgMobil" styleClass="form-control" />
+							<p:inputText id="hrgMobil" value="#{Opsi._hargamobil}" styleClass="form-control" />
 							<p:watermark for="hrgMobil" value="Harga Per-Hari Mobil" />
 						</p:outputPanel>
 
@@ -111,7 +97,7 @@
 							<p:outputPanel styleClass="input-group-addon">
 								<p:outputPanel styleClass="glyphicon glyphicon-road"></p:outputPanel>
 							</p:outputPanel>
-							<p:inputText id="path" styleClass="form-control" />
+							<p:inputText id="path" value="#{Opsi._pathtmp}" styleClass="form-control" />
 							<p:watermark for="path" value="Path tmp" />
 						</p:outputPanel>
 						
@@ -121,7 +107,7 @@
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3">
 							<p:commandButton value="Simpan" ajax="false"
-								actionListener="#{operatorController.saveOperator}"
+								actionListener="#{Opsi.updateOpsi}"
 								styleClass="btn btn-warning btncetak margin" />
 						</div>
 					</div>

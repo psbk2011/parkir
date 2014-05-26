@@ -14,6 +14,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import controller.OpsiController;
+
 public class TransaksiDao {
 	public void addTransaksi(Transaksi transaksi) {
 		Transaction trns = null;
@@ -100,36 +102,31 @@ public class TransaksiDao {
 
 	}
 
-	public void countMotor(Transaksi transaksi) {
-		Session session = HibernateUtils.getSessionFactory().openSession();
+	public String countMotor(Transaksi transaksi) {
 		try {
-			String SQL_QUERY = "SELECT COUNT(*) FROM Transaksi WHERE tipe_kendaraan = 'Motor' and waktu_keluar is null";
-			Query query = session.createQuery(SQL_QUERY);
-
-			for (Iterator it = query.iterate(); it.hasNext();) {
-				transaksi.setRowCount((Long) it.next());
-				transaksi.setJumlahMotor((200) - transaksi.getRowCount());
-			}
-			session.close();
+			OpsiController oc = new OpsiController();
+			Session session = HibernateUtils.getSessionFactory().openSession();
+			Query query = session.createSQLQuery("SELECT COUNT(*) FROM Transaksi WHERE tipe_kendaraan = 'Motor' AND waktu_keluar IS NULL");
+			List result = query.list();
+			int count = Integer.parseInt(oc.get_kapasitasmotor()) - Integer.parseInt(result.get(0).toString());
+			return Integer.toString(count);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error DAO Count Motor : " + e.getMessage());
 		}
+		return null;
 	}
-
-	public void countMobil(Transaksi transaksi) {
-		Session session = HibernateUtils.getSessionFactory().openSession();
+	
+	public String countMobil(Transaksi transaksi) {
 		try {
-			String SQL_QUERY = "SELECT COUNT(*) FROM Transaksi WHERE tipe_kendaraan = 'Mobil' and waktu_keluar is null";
-			Query query = session.createQuery(SQL_QUERY);
-
-			for (Iterator it = query.iterate(); it.hasNext();) {
-				transaksi.setRowCount((Long) it.next());
-				transaksi.setJumlahMobil((50) - transaksi.getRowCount());
-			}
-			session.close();
+			OpsiController oc = new OpsiController();
+			Session session = HibernateUtils.getSessionFactory().openSession();
+			Query query = session.createSQLQuery("SELECT COUNT(*) FROM Transaksi WHERE tipe_kendaraan = 'Mobil' AND waktu_keluar IS NULL");
+			List result = query.list();
+			int count = Integer.parseInt(oc.get_kapasitasmobil()) - Integer.parseInt(result.get(0).toString());
+			return Integer.toString(count);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error DAO Count Motor : " + e.getMessage());
 		}
+		return null;
 	}
-
 }
